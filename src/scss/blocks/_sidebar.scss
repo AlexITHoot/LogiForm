@@ -18,6 +18,10 @@
       &:hover,
       &.active {
         background: var(--bg-secondary);
+
+        a {
+          color: var(--main-black);
+        }
       }
     }
   }
@@ -32,6 +36,8 @@
         display: flex;
         align-items: center;
         gap: 15px;
+        flex-grow: 1;
+        color: var(--main-black);
       }
     }
   }
@@ -42,6 +48,8 @@
         display: flex;
         align-items: center;
         gap: 15px;
+        flex-grow: 1;
+        color: var(--main-black);
       }
 
       .icon {
