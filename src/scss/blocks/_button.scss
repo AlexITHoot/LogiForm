@@ -1,0 +1,38 @@
+.btn {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--border-radius);
+  flex-shrink: 0;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: var(--main-green);
+  color: var(--main-white);
+
+  &:hover {
+    background: color-mix(in oklab, var(--main-green) 80%, #000);
+  }
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--main-black);
+
+  &:hover {
+    background: color-mix(in lab, var(--bg-secondary) 90%, var(--blue))
+  }
+}
+
+.btn-tertiary {
+  background: var(--blue-sky);
+  color: var(--blue);
+
+  &:hover {
+    background: var(--blue);
+    color: var(--main-white);
+  }
+}

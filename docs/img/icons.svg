@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <symbol id="search">
+        <g>
+            <path d="M29.669,49.1A2.286,2.286,0,1,0,32.9,52.331l4.717-4.717a1.219,1.219,0,0,1,1.361-.194s-.057-.014.311.153a9.707,9.707,0,1,0-4.857-4.85c.165.364.148.3.148.3a1.213,1.213,0,0,1-.2,1.357Zm13.616-4.955a5.429,5.429,0,1,1,5.429-5.429A5.429,5.429,0,0,1,43.286,44.143Z" transform="translate(-29 -29)" fill="inherit"/>
+        </g>
+    </symbol>               
+</svg>
+
+<!-- <svg width="24" height="24" fill="none">
+  <use xlink:href="./images/icons.svg#search"></use>
+</svg> -->

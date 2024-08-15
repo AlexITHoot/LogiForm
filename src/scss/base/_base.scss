@@ -1,0 +1,75 @@
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--bg);
+	color: var(--main-black);
+	font-family: var(--font-main);
+}
+
+main {
+	height: 100vh;
+
+}
+
+.container {
+	width: 100%;
+	padding: 0 15px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	height: 100vh;
+	overflow: auto;
+}
+
+.gutter {
+	gap: var(--gutter);
+}
+
+.row {
+	gap: 15px;
+	flex: 1 1 100%;
+}
+
+.col {
+	display: flex;
+	flex: 1;
+}
+
+.col-4 {
+	flex: 1 1 calc((100%/12)*4);
+}
+
+.col-6 {
+	flex: 1 1 50%;
+}
+
+.col-8 {
+	flex: 1 1 calc((100%/12)*8);
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.align-item-start {
+	align-items: flex-start;
+}
+
+.align-content-start {
+	align-content: flex-start;
+}
+
+.flex-column {
+	flex-direction: column;
+}

@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .page-item {
+    min-width: 56px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px;
+    border-radius: var(--border-radius);
+    background: var(--bg-secondary);
+    transition: 0.2s;
+
+    &.active,
+    &:hover {
+      background: var(--blue);
+      color: var(--main-white);
+      cursor: pointer;
+    }
+  }
+}

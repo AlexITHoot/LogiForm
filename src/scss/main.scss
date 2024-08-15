@@ -1,0 +1,26 @@
+@import './base/reset';
+@import './base/base';
+@import './base/fonts';
+@import './blocks/variables';
+@import './blocks/button';
+@import './blocks/card';
+@import './blocks/statistic';
+@import './blocks/sidebar';
+@import './blocks/tables';
+@import './blocks/pagination';
+@import './blocks/progress';
+@import './blocks/dropdown';
+@import './blocks/tabs';
+@import './blocks/navbar';
+@import './blocks/select';
+
+html,
+body {
+  height: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Poppins, Helvetica, "sans-serif";
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,31 @@
+.navbar {
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .nav-item {
+      .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 50px;
+        padding: 4px 12px;
+        border-radius: var(--border-radius);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--main-black);
+
+        &:hover {
+          color: var(--blue);
+        }
+
+        &.active {
+          color: var(--main-white);
+          background: var(--blue);
+        }
+      }
+
+    }
+  }
+}

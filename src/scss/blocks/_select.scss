@@ -1,0 +1,49 @@
+@import '../../../node_modules/slim-select/src/slim-select/slimselect.scss';
+
+.ss-main {
+  height: 38px;
+  min-width: 120px;
+  background-color: var(--bg-secondary);
+  border: none;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &.ss-open-below {
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
+
+  .ss-values {
+    .ss-single {
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: var(--ss-spacing-l);
+    }
+  }
+
+  .ss-arrow {
+    path {
+      stroke: var(--grey)
+    }
+  }
+}
+
+.ss-content {
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--bg-secondary);
+
+  .ss-list {
+    .ss-option {
+      font-size: 12px;
+
+      &:not(.ss-disabled) {
+        &.ss-selected {
+          background-color: var(--blue);
+        }
+      }
+    }
+  }
+}
