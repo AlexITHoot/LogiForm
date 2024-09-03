@@ -1,0 +1,405 @@
+
+// const setListener = (element, type, handler) => {
+//   if (element) {
+//     return;
+//   }
+//   element.addEventListener(type, handler);
+//   return () => {
+//     element.removeEventListener(type, handler);
+//   }
+// }
+
+const dropdownBtn = document.querySelectorAll('.dropdown-btn');
+// const cl = document.classList('nav');
+// console.log(cl);
+
+
+dropdownBtn.forEach((el) => {
+  el.addEventListener('click', () => {
+    el.nextElementSibling.classList.toggle("show");
+  })
+  // el.setListener(el, 'click', () => {
+  //   console.log('Hello world!!!');
+  // })
+})
+
+// function myFunction() {
+//   document.getElementById("myDropdown").classList.toggle("show");
+// }
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches('.dropdown-btn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+import SlimSelect from 'slim-select';
+const allSelect = document.querySelectorAll('.selectElement');
+
+allSelect.forEach((el) => {
+  new SlimSelect({
+    select: el,
+    settings: {
+      showSearch: false
+    }
+  })
+})
+
+const tabBtn = document.querySelectorAll('.nav-tabs > li');
+
+
+// tabBtn.forEach((el) => {
+
+//   el.addEventListener('click', () => {
+//     // console.log(el.getAttribute('data-tab'));
+
+//     var i, x, tablinks;
+//     x = document.getElementsByClassName("tab-pane");
+//     for (i = 0; i < x.length; i++) {
+//       x[i].style.display = "none";
+//     }
+//     tablinks = document.getElementsByClassName("nav-item");
+//     for (i = 0; i < x.length; i++) {
+//       tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+//     }
+//     document.getElementById(el.getAttribute('data-tab')).style.display = "block";
+//     evt.currentTarget.className += " w3-red";
+
+//     // function openTab(evt, cityName) {
+
+//     // }
+//   })
+
+// })
+
+// function openTab(evt, cityName) {
+//   var i, x, tablinks;
+//   x = document.getElementsByClassName("tab-pane");
+//   for (i = 0; i < x.length; i++) {
+//     x[i].style.display = "none";
+//   }
+//   tablinks = document.getElementsByClassName("nav-item");
+//   for (i = 0; i < x.length; i++) {
+//     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+//   }
+//   document.getElementById(cityName).style.display = "block";
+//   evt.currentTarget.className += " w3-red";
+// }
+
+
+// window.addEventListener('DOMContentLoaded', function () {
+
+//   'use strict';
+//   let tab = document.querySelectorAll('.nav-item'),
+//     header = document.querySelector('.nav-tabs'),
+//     tabContent = document.querySelectorAll('.tab-pan');
+
+//   function hideTabContent(a) {
+//     for (let i = a; i < tabContent.length; i++) {
+//       tabContent[i].classList.remove('show');
+//       tabContent[i].classList.add('hide');
+//     }
+//   }
+
+//   hideTabContent(1);
+
+//   function showTabContent(b) {
+//     if (tabContent[b].classList.contains('hide')) {
+//       tabContent[b].classList.remove('hide');
+//       tabContent[b].classList.add('show');
+//     }
+//   }
+
+//   header.addEventListener('click', function (event) {
+//     let target = event.target;
+//     if (target && target.classList.contains('nav-item')) {
+//       for (let i = 0; i < tab.length; i++) {
+//         if (target == tab[i]) {
+//           hideTabContent(0);
+//           showTabContent(i);
+//           break;
+//         }
+//       }
+//     }
+
+//   });
+// });
+
+window.addEventListener('DOMContentLoaded', function () {
+
+  'use strict';
+  let tab = document.querySelectorAll('.nav-item'),
+    header = document.querySelector('.nav-tabs'),
+    tabContent = document.querySelectorAll('.tab-content-item');
+
+
+  function hideTabContent(a) {
+    for (let i = a; i < tabContent.length; i++) {
+      tabContent[i].classList.remove('show');
+      tabContent[i].classList.add('hide');
+    }
+  }
+
+  hideTabContent(1);
+
+  tab[0].classList.add('active');
+
+
+  function showTabContent(b) {
+    if (tabContent[b].classList.contains('hide')) {
+      tabContent[b].classList.remove('hide');
+      tabContent[b].classList.add('show');
+    }
+  }
+
+  header.addEventListener('click', function (event) {
+    tab.forEach((el) => {
+      el.classList.remove('active');
+    })
+
+    let target = event.target;
+
+
+    if (target && target.classList.contains('nav-item')) {
+      for (let i = 0; i < tab.length; i++) {
+        if (target == tab[i]) {
+          hideTabContent(0);
+          showTabContent(i);
+          target.classList.add('active')
+          break;
+        }
+      }
+    }
+
+  });
+});
+
+console.log(location.pathname.split("/"))
+
+//Radio checking
+
+const radioBtn = document.querySelectorAll('.form-radio');
+const par = document.querySelectorAll('.form-radio-list li');
+
+radioBtn.forEach(el => {
+  el.addEventListener('click', () => {
+    par.forEach(el => el.classList.remove('active'))
+    el.parentElement.classList.add('active')
+  })
+})
+
+//Templates tabs list
+
+// const templateList = document.querySelectorAll('.template-nav-list ul li');
+
+// templateList.forEach(el => {
+//   el.addEventListener('click', () => {
+//     templateList.forEach(el => {
+//       el.classList.remove('active')
+//     })
+//     el.classList.add('active')
+//   })
+// })
+window.addEventListener('DOMContentLoaded', function () {
+
+  'use strict';
+  let tab = document.querySelectorAll('.nav-item'),
+    header = document.querySelector('.template-nav-list ul'),
+    tabContent = document.querySelectorAll('.templates-list');
+
+
+  function hideTabContent(a) {
+    for (let i = a; i < tabContent.length; i++) {
+      tabContent[i].classList.remove('show');
+      tabContent[i].classList.add('hide');
+    }
+  }
+
+  hideTabContent(1);
+
+  tab[0].classList.add('active');
+
+
+  function showTabContent(b) {
+    if (tabContent[b].classList.contains('hide')) {
+      tabContent[b].classList.remove('hide');
+      tabContent[b].classList.add('show');
+    }
+  }
+
+  header.addEventListener('click', function (event) {
+    tab.forEach((el) => {
+      el.classList.remove('active');
+    })
+
+    let target = event.target;
+
+
+    if (target && target.classList.contains('nav-item')) {
+      for (let i = 0; i < tab.length; i++) {
+        if (target == tab[i]) {
+          hideTabContent(0);
+          showTabContent(i);
+          target.classList.add('active')
+          break;
+        }
+      }
+    }
+
+  });
+});
+
+//Upload file
+const actualBtn = document.getElementById('actual-btn');
+
+const fileChosen = document.querySelector('.file-chosen');
+const btn = document.querySelector('.btn-upload');
+
+actualBtn.addEventListener('change', function () {
+  fileChosen.textContent = this.files[0].name,
+    fileChosen.insertAdjacentHTML('afterbegin', `
+      <img src="./img/file.svg">
+    `)
+  // fileChosen.classList.add('uploaded')
+  if (this.files.length > 0) {
+    btn.textContent = 'Upload Another File'
+  }
+})
+
+
+//Wizard
+let stepIndex = 0;
+const steps = document.querySelectorAll('.wizard-step');
+const nextStepBtn = document.querySelectorAll('.next-step');
+console.log(nextStepBtn);
+
+
+const validateForm = (step) => {
+  switch (step) {
+    case '0':
+      const field = document.querySelector('input[data-rule="form-name"]');
+      const select = document.querySelector('select[data-rule="select-language"]')
+      field.addEventListener('input', () => {
+
+        if (field.value && select.value) {
+          nextStepBtn[stepIndex].removeAttribute('disabled', '')
+          return true;
+        } else {
+          nextStepBtn[stepIndex].setAttribute('disabled', '');
+          return false;
+        }
+      })
+      break;
+    case '1':
+      const radioForm = document.querySelectorAll('input[data-rule="form"]');
+
+      radioForm.forEach((el) => {
+        el.addEventListener()
+      })
+      // if(radioBtn:checked)
+      break;
+    default:
+  };
+
+}
+
+// const radioForm = document.querySelectorAll('input[data-rule="form"]');
+// console.log('Radio', radioForm);
+
+// const field = document.querySelector('input[data-rule="form-name"]');
+// const select = document.querySelector('select[data-rule="select-language"]')
+// field.addEventListener('input', () => {
+
+//   if (field.value && select.value) {
+//     nextStepBtn[stepIndex].removeAttribute('disabled', '')
+
+//   } else {
+//     nextStepBtn[stepIndex].setAttribute('disabled', '');
+
+//   }
+// })
+
+
+steps[stepIndex].classList.add('show');
+
+steps.forEach((el, index) => {
+  nextStepBtn[index].setAttribute('disabled', '');
+  // validateForm(String(index))
+  el.querySelector('.next-step').addEventListener('click', () => {
+    if (stepIndex < steps.length - 1) {
+      stepIndex++;
+
+      steps.forEach(el => {
+        el.classList.remove('show')
+      })
+      steps[stepIndex].classList.add('show');
+    }
+
+
+  })
+  el.querySelector('.prev-step').addEventListener('click', () => {
+    if (stepIndex > 0) {
+      stepIndex--;
+
+      steps.forEach(el => {
+        el.classList.remove('show')
+      })
+      steps[stepIndex].classList.add('show');
+    }
+
+  })
+})
+const wizard = document.querySelector('.wizard');
+const fields = wizard.querySelectorAll('input');
+fields.forEach((el) => {
+  el.addEventListener('input', () => {
+    validateStep();
+  })
+})
+
+const validateStep = () => {
+  steps[stepIndex].querySelectorAll('data-rule').forEach((el) => {
+    const rule = el.getAttribute('data-rule')
+    const res = rule(el.value);
+    console.log(res);
+
+  })
+}
+
+
+
+const notEmpty = (value) => {
+  return value != null && value != '';
+}
+
+
+// const checkAnswer = () => {
+
+//   console.log('Check answer');
+// }
+
+// let x = document.querySelector('.form-name');
+// console.log('Value', x);
+// const field = document.querySelector('input[data-rule]');
+// console.log('Field', field.value);
+
+
+
+// x.addEventListener('input', () => {
+//   if (x.value) {
+//     nextStepBtn[stepIndex].removeAttribute('disabled', '')
+//   } else {
+//     nextStepBtn[stepIndex].setAttribute('disabled', '')
+//   }
+// })
+
+// const select = document.forms['myForm'].select.value;
+

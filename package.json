@@ -35,8 +35,11 @@
   ],
   "dependencies": {
     "@selectize/selectize": "^0.15.2",
+    "apexcharts": "^3.52.0",
     "gulp-sass-glob": "^1.1.0",
+    "jstree": "^3.3.16",
     "normalize.css": "^3.0.3",
-    "slim-select": "^2.8.2"
+    "slim-select": "^2.8.2",
+    "sortablejs": "^1.15.2"
   }
 }

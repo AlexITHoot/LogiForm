@@ -5,9 +5,11 @@
 }
 
 .progress-bar {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.2s;
 
   span {
     font-size: 13px;

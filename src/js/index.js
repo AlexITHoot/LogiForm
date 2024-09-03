@@ -1,6 +1,4 @@
 
-console.log('Hello world!!!');
-
 // const setListener = (element, type, handler) => {
 //   if (element) {
 //     return;
@@ -11,6 +9,8 @@ console.log('Hello world!!!');
 //   }
 // }
 
+
+//Dropdown 
 const dropdownBtn = document.querySelectorAll('.dropdown-btn');
 // const cl = document.classList('nav');
 // console.log(cl);
@@ -43,6 +43,7 @@ window.onclick = function (event) {
   }
 }
 
+//Slim select
 import SlimSelect from 'slim-select';
 const allSelect = document.querySelectorAll('.selectElement');
 
@@ -55,7 +56,7 @@ allSelect.forEach((el) => {
   })
 })
 
-const tabBtn = document.querySelectorAll('.nav-tabs > li');
+// const tabBtn = document.querySelectorAll('.nav-tabs > li');
 
 
 // tabBtn.forEach((el) => {
@@ -135,52 +136,19 @@ const tabBtn = document.querySelectorAll('.nav-tabs > li');
 //   });
 // });
 
-window.addEventListener('DOMContentLoaded', function () {
-
-  'use strict';
-  let tab = document.querySelectorAll('.nav-item'),
-    header = document.querySelector('.nav-tabs'),
-    tabContent = document.querySelectorAll('.tab-content-item');
-
-
-  function hideTabContent(a) {
-    for (let i = a; i < tabContent.length; i++) {
-      tabContent[i].classList.remove('show');
-      tabContent[i].classList.add('hide');
-    }
-  }
-
-  hideTabContent(1);
-
-  tab[0].classList.add('active');
-
-
-  function showTabContent(b) {
-    if (tabContent[b].classList.contains('hide')) {
-      tabContent[b].classList.remove('hide');
-      tabContent[b].classList.add('show');
-    }
-  }
-
-  header.addEventListener('click', function (event) {
-    tab.forEach((el) => {
-      el.classList.remove('active');
-    })
-
-    let target = event.target;
-
-
-    if (target && target.classList.contains('nav-item')) {
-      for (let i = 0; i < tab.length; i++) {
-        if (target == tab[i]) {
-          hideTabContent(0);
-          showTabContent(i);
-          target.classList.add('active')
-          break;
-        }
-      }
-    }
-
-  });
-});
 console.log(location.pathname.split("/"))
+
+
+
+//Templates tabs list
+
+// const templateList = document.querySelectorAll('.template-nav-list ul li');
+
+// templateList.forEach(el => {
+//   el.addEventListener('click', () => {
+//     templateList.forEach(el => {
+//       el.classList.remove('active')
+//     })
+//     el.classList.add('active')
+//   })
+// })

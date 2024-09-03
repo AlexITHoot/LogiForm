@@ -1,0 +1,21 @@
+<svg width="54" height="36" viewBox="0 0 54 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="54" height="36" rx="4" fill="#BEDBFB"/>
+<mask id="path-2-inside-1_247_1297" fill="white">
+<path d="M17 4H46V36H17V4Z"/>
+</mask>
+<path d="M17 4H46V36H17V4Z" fill="white"/>
+<path d="M46 4H47V3H46V4ZM17 5H46V3H17V5ZM45 4V36H47V4H45Z" fill="#BEDBFB" mask="url(#path-2-inside-1_247_1297)"/>
+<mask id="path-4-inside-2_247_1297" fill="white">
+<path d="M13 8H42V36H13V8Z"/>
+</mask>
+<path d="M13 8H42V36H13V8Z" fill="white"/>
+<path d="M42 8H43V7H42V8ZM13 9H42V7H13V9ZM41 8V36H43V8H41Z" fill="#BEDBFB" mask="url(#path-4-inside-2_247_1297)"/>
+<mask id="path-6-inside-3_247_1297" fill="white">
+<path d="M8 12H38V36H8V12Z"/>
+</mask>
+<path d="M8 12H38V36H8V12Z" fill="white"/>
+<path d="M38 12H39V11H38V12ZM8 13H38V11H8V13ZM37 12V36H39V12H37Z" fill="#BEDBFB" mask="url(#path-6-inside-3_247_1297)"/>
+<rect x="13" y="17" width="20" height="3" fill="#BEDBFB"/>
+<rect x="13" y="23" width="20" height="3" fill="#BEDBFB"/>
+<rect x="13" y="29" width="20" height="3" fill="#BEDBFB"/>
+</svg>
