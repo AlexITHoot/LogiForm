@@ -8,11 +8,23 @@ var sortable = Sortable.create(el);
 //Chart
 import ApexCharts from 'apexcharts'
 var options = {
-  series: [70],
+  series: [100],
   chart: {
     height: 350,
     type: 'radialBar',
-
+    animations: {
+      enabled: true,
+      easing: 'easeinout',
+      speed: 1500,
+      animateGradually: {
+        enabled: true,
+        delay: 500
+      },
+      dynamicAnimation: {
+        enabled: true,
+        speed: 1500
+      }
+    },
   },
   plotOptions: {
     radialBar: {
@@ -38,7 +50,7 @@ var options = {
 };
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
+
 
 window.addEventListener('DOMContentLoaded', function () {
 
@@ -128,27 +140,93 @@ uploadBlock.forEach(el => {
 
 //Wizard
 let stepIndex = 0;
+let activeStepIndex = 5;
 const wizard = document.querySelector('.wizard-page');
 // const steps = wizard.querySelectorAll('.wizard-step');
 // const steps = wizard.querySelectorAll('.wizard-content');
+const commonFields = wizard.querySelectorAll('.wizard-left-side .common-fields li button');
+const commonFieldsDraggable = wizard.querySelector('#items');
+
+const changeButtonText = () => {
+  const b = commonFieldsDraggable.querySelectorAll('li button');
+  b.forEach(el => {
+    el.textContent = 'Remove';
+  })
+}
+
+commonFields.forEach(el => {
+  el.addEventListener('click', () => {
+    commonFieldsDraggable.appendChild(el.parentElement.cloneNode(true));
+    el.textContent = 'Added';
+    el.disabled = true;
+    displayedInformationBlock();
+    changeButtonText();
+  })
+})
+
+commonFieldsDraggable.addEventListener('click', (e) => {
+  if (e.target.classList.contains('btn')) {
+
+    commonFields.forEach(el => {
+      if (el.dataset.clone == e.target.dataset.clone) {
+        el.textContent = 'Add';
+        el.disabled = false;
+      }
+    })
+    e.target.parentElement.remove();
+    displayedInformationBlock();
+  }
+})
+
+const informationBlock = wizard.querySelectorAll('.information-block')
+
+
+
+
+const displayedInformationBlock = () => {
+  if (commonFieldsDraggable.children.length <= 0) {
+    informationBlock[0].style.display = 'block',
+      commonFieldsDraggable.parentElement.style.display = 'none'
+  } else {
+    informationBlock[0].style.display = 'none',
+      commonFieldsDraggable.parentElement.style.display = 'block'
+  }
+}
+
+displayedInformationBlock()
 
 const nextStepBtn = wizard.querySelector('.next-step');
 const prevStepBtn = wizard.querySelector('.prev-step');
 
 const steps = document.querySelectorAll(".wizard-left-side .wizard-content");
 
+let activeSteps;
+activeSteps = wizard.querySelectorAll('.active-step');
+
 const chooseTypeForm = wizard.querySelector('.choose-type-form ');
 const selectedTemplate = wizard.querySelector('.selected-template');
+
+const importFromLocal = wizard.querySelector('.block-select-from-local-hd');
+const importFromUrl = wizard.querySelector('.block-url-path-to-form');
 
 const stepProgress = wizard.querySelector('.wizard-progress .step-progress');
 const numberOfSteps = wizard.querySelector('.number_of_steps');
 const progressBar = wizard.querySelector('.progress-bar');
-stepProgress.innerHTML = stepIndex + 1;
-numberOfSteps.innerHTML = steps.length;
+
+// stepProgress.innerHTML = 1;
+// numberOfSteps.innerHTML = activeStepIndex;
 console.log('stepIndex', stepIndex);
 steps.forEach(el => {
   console.log('step check value', el.dataset.nextStep);
 })
+
+const treeList = wizard.querySelectorAll('#kt_tree_2 ul li');
+treeList.forEach(el => {
+  const params = JSON.parse(el.dataset.jstree);
+  console.log('Tree', params.selected);
+})
+
+
 
 
 const fillProgressBar = () => {
@@ -172,6 +250,20 @@ const chooseItem = (el) => {
 
   return false;
 };
+
+const selectItem = (el) => {
+  const items = el.querySelectorAll('[data-rule]');
+  console.log('si', item);
+
+  for (let index = 0; index < items.length; index++) {
+    const r = items[index].checked;
+    if (r) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 const validate = (el) => {
   const rule = el.getAttribute('data-rule');
@@ -207,19 +299,109 @@ const onChange = (e) => {
 }
 
 const inputs = wizard.querySelectorAll('input[data-rule][type="text"]')
+
 inputs.forEach(el => {
   el.addEventListener('input', onChange);
 });
 
 const selects = wizard.querySelectorAll('select[data-rule]')
+
 selects.forEach(el => {
   el.addEventListener('change', onChange);
 });
 
-const radioBtns = wizard.querySelectorAll('input[data-rule][type="radio"]')
+const radioBtns = wizard.querySelectorAll('input[data-rule][type="radio"]');
+
 radioBtns.forEach(el => {
   el.addEventListener('change', onChange);
   el.addEventListener('click', () => {
+    if (el.value === 'standartForm') {
+      steps.forEach(element => {
+        element.classList.remove('active-step');
+      })
+      steps.forEach(element => {
+        if (
+          element.classList.contains('step-1') ||
+          element.classList.contains('step-2') ||
+          element.classList.contains('step-3')) {
+          element.classList.add('active-step');
+          activeSteps = wizard.querySelectorAll('.active-step');
+        }
+      })
+
+    } else if (el.value === 'useTemplate') {
+      steps.forEach(element => {
+        element.classList.remove('active-step');
+      })
+      steps.forEach(element => {
+        if (
+          element.classList.contains('step-1') ||
+          element.classList.contains('step-2') ||
+          element.classList.contains('step-3') ||
+          element.classList.contains('step-4')) {
+          element.classList.add('active-step');
+          activeSteps = wizard.querySelectorAll('.active-step');
+        }
+      })
+    } else if (el.value === 'blackCanvas') {
+      steps.forEach(element => {
+        element.classList.remove('active-step');
+      })
+      steps.forEach(element => {
+        if (
+          element.classList.contains('step-1') ||
+          element.classList.contains('step-2') ||
+          element.classList.contains('step-3') ||
+          element.classList.contains('step-4') ||
+          element.classList.contains('step-5')) {
+          element.classList.add('active-step');
+          activeSteps = wizard.querySelectorAll('.active-step');
+        }
+      })
+    } else if (el.value === 'aiForm') {
+      steps.forEach(element => {
+        element.classList.remove('active-step');
+      })
+      steps.forEach(element => {
+        if (
+          element.classList.contains('step-1') ||
+          element.classList.contains('step-2') ||
+          element.classList.contains('step-6')) {
+          element.classList.add('active-step');
+          activeSteps = wizard.querySelectorAll('.active-step');
+          console.log('Active steps 2', activeSteps);
+        }
+      })
+    } else if (el.value === 'htmlForm') {
+      steps.forEach(element => {
+        element.classList.remove('active-step');
+      })
+      steps.forEach(element => {
+        if (
+          element.classList.contains('step-1') ||
+          element.classList.contains('step-2') ||
+          element.classList.contains('step-4') ||
+          element.classList.contains('step-7')) {
+          element.classList.add('active-step');
+          activeSteps = wizard.querySelectorAll('.active-step');
+        }
+      })
+    } else if (el.value === 'pdfForm') {
+      steps.forEach(element => {
+        element.classList.remove('active-step');
+      })
+      steps.forEach(element => {
+        if (
+          element.classList.contains('step-1') ||
+          element.classList.contains('step-2') ||
+          element.classList.contains('step-4') ||
+          element.classList.contains('step-9')) {
+          element.classList.add('active-step');
+          activeSteps = wizard.querySelectorAll('.active-step');
+        }
+      })
+    }
+
     if (el.value == 'useTemplate') {
       chooseTypeForm.classList.remove('active');
       chooseTypeForm.querySelector('[data-rule]').disabled = true;
@@ -228,6 +410,14 @@ radioBtns.forEach(el => {
       selectedTemplate.classList.remove('active');
       chooseTypeForm.classList.add('active');
       chooseTypeForm.querySelector('[data-rule]').disabled = false;
+    }
+
+    if (el.value == 'hdLocal') {
+      importFromUrl.classList.remove('active');
+      importFromLocal.classList.add('active');
+    } else if (el.value == 'urlPath') {
+      importFromLocal.classList.remove('active');
+      importFromUrl.classList.add('active');
     }
   })
 });
@@ -250,24 +440,24 @@ const nextStepBtnText = () => {
 
 
 nextStepBtn.addEventListener('click', () => {
-  if (stepIndex < steps.length - 1) {
-    const currentStep = steps[stepIndex];
+  if (stepIndex < activeSteps.length - 1) {
+    // const currentStep = steps[stepIndex];
 
-    const nextStepParamsRaw = currentStep.getAttribute('data-next-step');
-    const nextStepParams = JSON.parse(nextStepParamsRaw);
+    // const nextStepParamsRaw = currentStep.getAttribute('data-next-step');
+    // const nextStepParams = JSON.parse(nextStepParamsRaw);
 
-    let nextStepIndex;
-    if (nextStepParams.element) {
+    // let nextStepIndex;
+    // if (nextStepParams.element) {
 
-      const elementValue = currentStep.querySelector(`[name="${nextStepParams.element}"]:checked`).value;
-      nextStepIndex = nextStepParams.stepIndex[elementValue];
-    } else {
-      nextStepIndex = nextStepParams.stepIndex;
-    }
+    //   const elementValue = currentStep.querySelector(`[name="${nextStepParams.element}"]:checked`).value;
+    //   nextStepIndex = nextStepParams.stepIndex[elementValue];
+    // } else {
+    //   nextStepIndex = nextStepParams.stepIndex;
+    // }
 
-    currentStep.classList.remove("show");
-    steps[nextStepIndex].classList.add("show");
-    stepIndex = nextStepIndex;
+    activeSteps[stepIndex].classList.remove("show");
+    activeSteps[stepIndex + 1].classList.add("show");
+    stepIndex++;
     stepProgress.innerHTML = stepIndex;
     prevStepBtnText();
     nextStepBtnText();
@@ -275,13 +465,20 @@ nextStepBtn.addEventListener('click', () => {
     onChange();
     stepBackground();
     displayWizardRightSide();
+    console.log('active step!!!!', activeSteps[stepIndex].dataset.step);
+
+  }
+  if (stepIndex >= 2) {
+    activeStepIndex = activeSteps.length;
+    console.log('Too hight');
+
   }
 })
 
 prevStepBtn.addEventListener('click', () => {
   if (stepIndex > 0) {
-    steps[stepIndex].classList.remove("show");
-    steps[stepIndex - 1].classList.add("show");
+    activeSteps[stepIndex].classList.remove("show");
+    activeSteps[stepIndex - 1].classList.add("show");
     stepIndex--;
     stepProgress.innerHTML = stepIndex + 1;
     prevStepBtnText();
@@ -289,6 +486,8 @@ prevStepBtn.addEventListener('click', () => {
     fillProgressBar();
     stepBackground();
     displayWizardRightSide();
+    console.log('active step!!!!', activeSteps);
+
   }
 })
 
@@ -296,17 +495,17 @@ prevStepBtn.addEventListener('click', () => {
 //
 
 const stepBackground = () => {
-  if (stepIndex == 0) {
-    wizard.style.background = `url('./img/wizard-bg-1.png') no-repeat center right -68px`;
-  } else if (stepIndex == 1) {
-    wizard.style.background = `url('../../img/wizard-bg-2.png') no-repeat center right -535px`;
-  } else if (stepIndex == 2) {
-    wizard.style.background = `url('../../img/wizard-bg-3.png') no-repeat center right`;
-  } else if (stepIndex == 3) {
-    wizard.style.background = `url('../../img/wizard-bg-4.png') no-repeat center right`;
-  } else {
-    wizard.style.background = `none`
-  }
+  // if (stepIndex == 0) {
+  //   wizard.style.background = `url('./img/wizard-bg-1.png') no-repeat center right -68px`;
+  // } else if (stepIndex == 1) {
+  //   wizard.style.background = `url('../../img/wizard-bg-2.png') no-repeat center right -535px`;
+  // } else if (stepIndex == 2) {
+  //   wizard.style.background = `url('../../img/wizard-bg-3.png') no-repeat center right`;
+  // } else if (stepIndex == 3) {
+  //   wizard.style.background = `url('../../img/wizard-bg-4.png') no-repeat center right`;
+  // } else {
+  //   wizard.style.background = `none`
+  // }
 }
 stepBackground();
 
@@ -317,19 +516,18 @@ const useTemplate = templatePage.querySelectorAll('.use-template');
 const wizardRightSide = wizard.querySelector('.wizard-right-side');
 const wizardRightSideStepContent = wizard.querySelectorAll('.wizard-right-side .wizard-step-content');
 
+
 const displayWizardRightSide = () => {
   wizardRightSideStepContent.forEach(el => {
-    // console.log('step page', el.dataset.stepPage[4]);
-
-    if (stepIndex == 4) {
-      wizardRightSide.classList.remove('hide')
-      if (el.dataset.stepPage == 4) {
-        el.style.display = 'block';
-      }
-    } else if (stepIndex == 5) {
+    if (activeSteps[stepIndex].dataset.step == 5) {
       wizardRightSide.classList.remove('hide')
       if (el.dataset.stepPage == 5) {
-        el.style.display = 'block';
+        el.style.display = 'flex';
+      }
+    } else if (activeSteps[stepIndex].dataset.step == 6) {
+      wizardRightSide.classList.remove('hide')
+      if (el.dataset.stepPage == 6) {
+        el.style.display = 'flex';
       }
     } else {
       wizardRightSide.classList.add('hide')
@@ -367,12 +565,46 @@ useTemplate.forEach((el) => {
   })
 })
 
+const textareaField = document.querySelectorAll('.chat-input-field textarea');
+const sentButton = document.querySelector('.chat-input-field button')
+const responseProgress = document.querySelector('.response-progress');
 
+textareaField.forEach(el => {
+  el.parentElement.querySelector('button').disabled = true;
+  el.addEventListener('input', () => {
+    if (el.value) {
+      el.parentElement.querySelector('button').disabled = false;
+      console.log(el.value);
+    } else {
+      el.parentElement.querySelector('button').disabled = true;
+    }
+  })
+})
 
+sentButton.addEventListener('click', () => {
+  displayLoading();
+})
 
+// showing loading
+function displayLoading() {
+  responseProgress.classList.remove("hide");
+  informationBlock[1].style.display = "none";
+  chart.render();
+  // to stop loading after some time
+  setTimeout(() => {
+    responseProgress.classList.add("hide");
+    showContentAfterGetResponse()
+  }, 2000);
+}
 
-
-
+const showContentAfterGetResponse = () => {
+  wizardRightSideStepContent.forEach(el => {
+    if (el.dataset.stepPage == 6) {
+      el.querySelector('.wizard-header').classList.remove('hide');
+      el.querySelector('.chat-text-response').classList.remove('hide');
+    }
+  })
+}
 
 // const dataFormType = wizard.querySelectorAll('[data-form-type]');
 // const formRadioBtns = wizard.querySelectorAll('[data-form-choose] input[data-rule][type="radio"]');

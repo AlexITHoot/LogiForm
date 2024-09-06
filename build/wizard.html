@@ -24,13 +24,13 @@
                   <p>New Wizard Form</p>
                 </div>
                 <div class="wizard-progress">
-                  <label for="">Step <span class="step-progress"></span> of <span class="number_of_steps">5</span></label>
+                  <label for="">Step <span class="step-progress">1</span> of <span class="number_of_steps">5</span></label>
                   <div class="progress">
                     <div class="progress-bar"></div>
                   </div>
                 </div>
               </div>
-              <div class="wizard-content step-1 show" data-step="step-1" data-next-step='{ "element": null, "stepIndex": 1 }'>
+              <div class="wizard-content step-1 show active-step" data-step="1" data-next-step='{ "element": null, "stepIndex": 1 }'>
                 <div class="wizard-title">
                   <div class="wizard-inner-title">
                     <p>General settings</p>
@@ -55,7 +55,7 @@
                   </div>
                 </div>
               </div>
-              <div class="wizard-content step-2" data-step="step-2" data-next-step='{ "element": "general", "stepIndex": { "standartForm": 2, "aiForm": 5, "htmlForm": 3, "pdfForm": 3 } }'>
+              <div class="wizard-content step-2 active-step" data-step="2" data-next-step='{ "element": "general", "stepIndex": { "standartForm": 2, "aiForm": 5, "htmlForm": 3, "pdfForm": 3 } }'>
                 <div class="wizard-title">
                   <div class="wizard-inner-title">
                     <p>What type of form do you want to create</p>
@@ -138,7 +138,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="wizard-content step-3" data-step="step-3" data-next-step='{ "element": "create-form", "stepIndex": { "useTemplate": 3, "blackCanvas": 3 } }'>
+              <div class="wizard-content step-3" data-step="3" data-next-step='{ "element": "create-form", "stepIndex": { "useTemplate": 3, "blackCanvas": 3 } }'>
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>What type of form do you want to create</p>
@@ -246,7 +246,7 @@
                   </div>                                    
                   </div>                  
               </div>
-              <div class="wizard-content step-4" data-step="step-4" data-next-step="{ }">
+              <div class="wizard-content step-4" data-step="4" data-next-step="{ }">
                 <div class="wizard-title">
                   <div class="wizard-inner-title">
                     <p>What type of form do you want to create</p>
@@ -259,49 +259,49 @@
                 <div class="wizard-card d-flex flex-column flex-grow">
                   <div class="wizard-card-content d-flex">
                       <div id="kt_tree_2" class="tree-demo">
-                        <ul>
-                          <li>
+                        <ul data-rule="selectItem">
+                          <li data-jstree='{ "opened" : true }'  data-rule>
                             Root node 1
                             <ul>
-                              <li data-jstree='{ "selected" : true }'>
+                              <li data-jstree='{ "selected" : false }' data-rule>
                                 <a href="javascript:;">
                                 Initially selected </a>
                               </li>
-                              <li data-jstree='{ "icon" : "fas fa-chart-pie text-warning" }'>
+                              <li data-jstree='{ "icon" : "fas fa-chart-pie text-warning" }' data-rule>
                                 custom icon URL
                               </li>
-                              <li data-jstree='{ "opened" : true }'>
+                              <li data-jstree='{ "opened" : true }' data-rule>
                                 initially open
                                 <ul>
-                                  <li data-jstree='{ "disabled" : true }'>
+                                  <li data-jstree='{ "disabled" : true }' data-rule>
                                     Disabled Node
                                   </li>
-                                  <li data-jstree='{ "type" : "file" }'>
+                                  <li data-jstree='{ "type" : "file" }' data-rule>
                                     Another node
                                   </li>
                                 </ul>
                               </li>
-                              <li data-jstree='{ "icon" : "fa fa-user-circle text-warning" }'>
+                              <li data-jstree='{ "icon" : "fa fa-user-circle text-warning" }' data-rule>
                                 Custom icon class (bootstrap)
                               </li>
                             </ul>
                           </li>
-                          <li data-jstree='{ "type" : "file" }'>
-                            <a href="https://keenthemes.com/">
+                          <li data-jstree='{ "type" : "file" }' data-rule>
+                            <a href="#">
                             Clickable link node </a>
                           </li>
                         </ul>
                       </div>                     
                   </div>
                   <div class="wizard-card-footer">
-                    <a href="#" class="create-new-project">
+                    <a href="#" class="create-new-project" id="createNewFolder">
                       <img src="./img/AddFolder.svg" alt="">
                       <span>New Project Folder</span> 
                     </a>
                   </div>             
                 </div>
               </div>
-              <div class="wizard-content overflow-hidden d-flex flex-column step-5" data-step="step-5">
+              <div class="wizard-content overflow-hidden d-flex flex-column step-5" data-step="5">
                 <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>What type of form do you want to create</p>
@@ -320,7 +320,7 @@
                           </div>
                           <span>Address</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="adress">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -329,7 +329,7 @@
                           </div>
                           <span>Age</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="age">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -338,7 +338,7 @@
                           </div>
                           <span>Country</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="country">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -347,7 +347,7 @@
                           </div>
                           <span>Canadian Province</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="canadianProvince">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -356,7 +356,7 @@
                           </div>
                           <span>City</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="city">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -365,7 +365,7 @@
                           </div>
                           <span>Company</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="company">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -374,7 +374,7 @@
                           </div>
                           <span>Email Address</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="emailAddress">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -383,7 +383,7 @@
                           </div>
                           <span>First Name</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="firstName">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -392,7 +392,7 @@
                           </div>
                           <span>Last Name</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="lastName">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -401,7 +401,7 @@
                           </div>
                           <span>Full Name</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="fullName">Add</button>
                       </li>
                       <li>
                         <div class="field-title">
@@ -410,12 +410,12 @@
                           </div>
                           <span>Newsletter Option</span>
                         </div>
-                        <button class="btn btn-secondary">Add</button>
+                        <button class="btn btn-secondary" data-clone="newsletterOption">Add</button>
                       </li>
                     </ul>
                 </div>                   
               </div> 
-              <div class="wizard-content step-6" data-step="step-6">
+              <div class="wizard-content step-6" data-step="6">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Describe Your Form</p>
@@ -437,7 +437,7 @@
                         </div>
                       </div>
                       <div class="chat-input-field">
-                        <textarea name="" id="" rows="1">I want a car payment form</textarea>
+                        <textarea name="" id="" rows="1" placeholder="Describe Your Form In Detail"></textarea>
                         <button>
                           <img src="./img/sent.svg" alt="">
                         </button>
@@ -453,7 +453,7 @@
                     </div>
                   </div>                  
               </div> 
-              <div class="wizard-content step-7" data-step="step-7">
+              <div class="wizard-content step-7" data-step="7">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Import Source</p>
@@ -477,7 +477,7 @@
                             </div>                    
                           </div>
                           <div class="d-flex">
-                            <input type="radio" name="import-source" data-rule value="useTemplate">
+                            <input type="radio" name="import-source" data-rule value="hdLocal">
                             <span class="radion-btn"></span>                    
                           </div>
                         </label>
@@ -486,7 +486,7 @@
                         <label class="form-radio">
                           <div class="element">
                             <div class="icon">
-                              <img src="./img/StartWithBlackCanvas-icon.svg" alt="">
+                              <img src="./img/StartWithBlackCanvas-icon.svg" alt="hdLocal">
                             </div>
                             <div class="element-title">
                               <p>Enter URL path to the form</p>
@@ -494,14 +494,14 @@
                             </div>                    
                           </div>
                           <div class="d-flex">
-                            <input type="radio" name="import-source" data-rule value="blackCanvas">
+                            <input type="radio" name="import-source" data-rule value="urlPath">
                             <span class="radion-btn"></span>                    
                           </div>
                         </label>
                       </li>
                     </ul>                    
                   </div>
-                  <div>
+                  <div class="block-select-from-local-hd">
                     <div class="wizard-title">
                       <div class="wizard-inner-title">          
                         <p>Select from your local hard drive</p>
@@ -519,7 +519,7 @@
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div class="block-url-path-to-form">
                     <div class="wizard-title">
                       <div class="wizard-inner-title">          
                         <p>Enter the URL path to the form</p>
@@ -534,7 +534,7 @@
                     </div>
                   </div>
               </div> 
-              <div class="wizard-content step-8" data-step="step-8">
+              <div class="wizard-content step-8" data-step="8">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Import your PDF Form</p>
@@ -583,7 +583,7 @@
                     </ul>                    
                   </div>
               </div>
-              <div class="wizard-content step-9" data-step="step-9">
+              <div class="wizard-content step-9" data-step="9">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Import your PDF Form</p>
@@ -622,7 +622,7 @@
                     Once form fields have been added to the PDF, you can import it here and a database and processing scripts will be automatically generated.</p>
                   </div>                  
               </div> 
-              <div class="wizard-content step-10" data-step="step-10">
+              <div class="wizard-content step-10" data-step="10">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Populated PDF Encryption Option</p>
@@ -721,7 +721,7 @@
                     </div>
                   </div>
               </div> 
-              <div class="wizard-content step-11" data-step="step-11">
+              <div class="wizard-content step-11" data-step="11">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Additional PDF Settings</p>
@@ -796,14 +796,14 @@
           </div>
           <div class="col-6 flex-column">
             <div class="wizard-right-side hide">
-              <div class="wizard-step-content bg-white" data-step-page="4">
+              <div class="wizard-step-content bg-white h-100" data-step-page="5">
                 <div class="wizard-header step-1">
                   <div class="wizard-header-title">
                     <p>Project Name Template</p>
                   </div>              
                 </div>
                 <div class="wizard-content">
-                  <div class="information-block">
+                  <div class="information-block ">
                     <div class="icon">
                       <img src="./img/info-icon.svg" alt="">
                     </div>
@@ -813,28 +813,7 @@
                       Don't worry, you can delete extra pages at any time.</p>
                   </div>
                   <div class="wizard-card">
-                    <ul class="common-fields" id="items">
-                      <li>
-                        <div class="field-title">
-                          <img src="./img/menu.svg" alt="">
-                          <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
-                          </div>
-                          <span>Address</span>
-                        </div>
-                        <button class="btn btn-secondary">Add</button>
-                      </li>
-                      <li>
-                        <div class="field-title">
-                          <img src="./img/menu.svg" alt="">
-                          <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
-                          </div>
-                          <span>Age</span>
-                        </div>
-                        <button class="btn btn-secondary">Add</button>
-                      </li>
-                    </ul>                
+                    <ul class="common-fields" id="items"></ul>                
                   </div>
                 </div>
                 <div class="wizard-footer d-flex justify-content-between">
@@ -842,16 +821,37 @@
                   <button class="btn btn-secondary">Add page</button>              
                 </div>                                 
               </div>
-              <div class="wizard-step-content" data-step-page="5">
-                <div>
-                  <div class="wizard-header step-1">
+              <div class="wizard-step-content " data-step-page="6">
+                <div class="wizard-inner-content bg-white hide">
+                  <div class="wizard-header">
                     <div class="wizard-header-title">
-                      <p>Project Name Template</p>
+                      <p>Preview Your Form</p>
                     </div>              
-                  </div>  
-                  <div class="wizard-content"></div>  
+                  </div>
+                  <div class="wizard-content">
+                    <div class="chat-text-response">
+                      <p>Sure, I can help you with that! Let’s start by outlining a typical car payment form. 
+                      The form will be divided into multiple pages to make it easier to complete. 
+                      Here’s suggested outline:</p>
+                      <dl>
+                        <span>### Page 1: Personal Information</span>
+                        <ul>
+                          <li>– Full name</li>
+                          <li>– Email Address</li>
+                          <li>– Phone Number</li>
+                        </ul>
+                      </dl>
+                      <dl>
+                        <span>### Page 2: Address Information</span>
+                        <ul>
+                          <li>– Home Address</li>
+                          <li>– Mailing Address</li>
+                        </ul>
+                      </dl>                      
+                    </div>
+                  </div>                                      
                 </div>
-                <div>
+                <div class="wizard-inner-content">
                   <div class="wizard-content">
                     <div class="information-block">
                       <div class="icon">
@@ -859,9 +859,12 @@
                       </div>
                       <p>To Get the First Form Preview, Describe Your Form In Detail, and the Logiform AI Wizard Will Generate It For</p>
                     </div>
-                    <div id="chart"></div>                    
-                  </div>
+                    <div class="response-progress hide">
+                      <div id="chart"></div>                      
+                    </div>
+                  </div>                   
                 </div>
+
               </div>          
             </div>
           </div>
@@ -1154,7 +1157,18 @@
             document.location.href = link.attr("href");
             return false;
         }
-    });       
+    });
+    // const c = document.getElementById('createNewFolder');
+    // c.addEventListener('click',()=>{
+    //   var position = 'inside';
+    //   var parent = $('#kt_tree_2').jstree('get_selected');
+    //   var node = { id:123,text:"Hello world"};
+    //   $('#kt_tree_2').jstree('create_node', parent, node, 'last');   
+    // })
+      // var position = 'inside';
+      // var parent = $('#kt_tree_2').jstree('get_selected');
+      // var node = { id:123,text:"Hello world"};
+      // $('#kt_tree_2').jstree("create_node", parent, newNode, position, false, false);       
   </script>
  
 </body>
