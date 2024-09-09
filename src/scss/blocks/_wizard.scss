@@ -124,6 +124,14 @@
       }
     }
   }
+
+  .common-fields {
+    li {
+      .move {
+        display: flex;
+      }
+    }
+  }
 }
 
 .wizard-step {
@@ -739,10 +747,21 @@
     border-bottom: 1px solid var(--border-color);
     gap: 10px;
 
+    .move {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+
     .field-title {
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    button {
+      min-width: 100px;
     }
 
     &:last-child {
@@ -791,4 +810,6 @@
   }
 }
 
-.block-selecte-template {}
+.block-encryprion-option {
+  margin-bottom: 38px;
+}

@@ -149,7 +149,7 @@
                     </div>
                   </div>
                   <div>
-                    <ul class="form-radio-list " data-rule="chooseItem">
+                    <ul class="form-radio-list" data-rule="chooseItem">
                       <li>
                         <label class="form-radio">
                           <div class="element">
@@ -188,7 +188,7 @@
                   </div>
                   <div class="choose-type-form">
                     <div class="wizard-title">
-                      <div class="wizard-inner-title">          
+                      <div class="wizard-inner-titl`e">          
                         <p>Single Page or Multipage Form?</p>
                       </div>
                     </div>                  
@@ -235,11 +235,12 @@
                         <p>Selected Template</p>          
                       </div>
                     </div>
-                  <div class="wizard-card">
+                  <div class="wizard-card" data-rule="selectTemplate">
                     <div class="wizard-card-content d-flex align-items-center justify-content-between block-selecte-template">
                       <div class="template-viewer">
-                        <div class="select-template-icon"></div>
+                        <div class="select-template-icon" data-rule></div>
                         <span class="select-template-title">Please select form template</span>
+                        <input type="hidden" name="selected-templete" data-rule />
                       </div>
                       <button class="btn btn-secondary">Select Template</button>
                     </div>
@@ -258,35 +259,35 @@
                 </div>
                 <div class="wizard-card d-flex flex-column flex-grow">
                   <div class="wizard-card-content d-flex">
-                      <div id="kt_tree_2" class="tree-demo">
-                        <ul data-rule="selectItem">
-                          <li data-jstree='{ "opened" : true }'  data-rule>
+                      <div id="kt_tree_2" class="tree-demo" data-rule="selectTree">
+                        <ul>
+                          <li data-jstree='{ "opened" : true }'>
                             Root node 1
                             <ul>
-                              <li data-jstree='{ "selected" : false }' data-rule>
+                              <li data-jstree='{ "selected" : false }'>
                                 <a href="javascript:;">
                                 Initially selected </a>
                               </li>
-                              <li data-jstree='{ "icon" : "fas fa-chart-pie text-warning" }' data-rule>
+                              <li data-jstree='{ "icon" : "fas fa-chart-pie text-warning" }'>
                                 custom icon URL
                               </li>
-                              <li data-jstree='{ "opened" : true }' data-rule>
+                              <li data-jstree='{ "opened" : true }'>
                                 initially open
                                 <ul>
-                                  <li data-jstree='{ "disabled" : true }' data-rule>
+                                  <li data-jstree='{ "disabled" : true }'>
                                     Disabled Node
                                   </li>
-                                  <li data-jstree='{ "type" : "file" }' data-rule>
+                                  <li data-jstree='{ "type" : "file" }'>
                                     Another node
                                   </li>
                                 </ul>
                               </li>
-                              <li data-jstree='{ "icon" : "fa fa-user-circle text-warning" }' data-rule>
+                              <li data-jstree='{ "icon" : "fa fa-user-circle text-warning" }'>
                                 Custom icon class (bootstrap)
                               </li>
                             </ul>
                           </li>
-                          <li data-jstree='{ "type" : "file" }' data-rule>
+                          <li data-jstree='{ "type" : "file" }'>
                             <a href="#">
                             Clickable link node </a>
                           </li>
@@ -315,8 +316,11 @@
                     <ul class="common-fields">
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>Address</span>
                         </div>
@@ -324,8 +328,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>Age</span>
                         </div>
@@ -333,6 +340,9 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
                             <img src="./img/common-fields-icon.svg" alt="">
                           </div>
@@ -342,6 +352,9 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
                             <img src="./img/common-fields-icon.svg" alt="">
                           </div>
@@ -351,8 +364,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>City</span>
                         </div>
@@ -360,8 +376,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>Company</span>
                         </div>
@@ -369,8 +388,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>Email Address</span>
                         </div>
@@ -378,8 +400,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>First Name</span>
                         </div>
@@ -387,8 +412,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>Last Name</span>
                         </div>
@@ -396,8 +424,11 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt="">
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-1.svg" alt="">
                           </div>
                           <span>Full Name</span>
                         </div>
@@ -405,14 +436,18 @@
                       </li>
                       <li>
                         <div class="field-title">
+                          <div class="move">
+                            <img src="./img/menu.svg" alt=""/>
+                          </div>                          
                           <div class="icon">
-                            <img src="./img/common-fields-icon.svg" alt="">
+                            <img src="./img/common-fields-icon-2.svg" alt="">
                           </div>
                           <span>Newsletter Option</span>
                         </div>
                         <button class="btn btn-secondary" data-clone="newsletterOption">Add</button>
                       </li>
                     </ul>
+                    <select type="hidden" multiple name="common-fields" data-rule="multiSelectNotEmpty" style="display: none;"></select>
                 </div>                   
               </div> 
               <div class="wizard-content step-6" data-step="6">
@@ -507,12 +542,12 @@
                         <p>Select from your local hard drive</p>
                       </div>
                     </div>                     
-                    <div class="wizard-card">
+                    <div class="wizard-card" data-rule="uploadItem">
                       <div class="wizard-card-content">
                         <div class="upload-block d-flex align-items-center justify-content-between">
                           <span class="file-chosen">Upload Form</span>
                           <label class="form__upload">
-                            <input type="file" class="actual-btn">
+                            <input type="file" class="actual-btn" data-rule>
                             <span class="btn-upload">Upload File</span>
                           </label>   
                         </div>
@@ -525,16 +560,55 @@
                         <p>Enter the URL path to the form</p>
                       </div>
                     </div>                     
-                    <div class="wizard-card">
+                    <div class="wizard-card" data-rule="notEmpty">
                       <div class="wizard-card-content">
                         <div class="form-group">
-                          <input type="text" placeholder="Enter URL">
+                          <input type="text" placeholder="Enter URL" data-rule>
                         </div>
                       </div>
                     </div>
                   </div>
               </div> 
               <div class="wizard-content step-8" data-step="8">
+                  <div class="wizard-title">
+                    <div class="wizard-inner-title">
+                      <p>Import your PDF Form</p>
+                      <span>Select the PDF form from your hard drive to upload it</span>            
+                    </div>
+                    <div class="icon">
+                      <img src="./img/Question.svg" alt="">
+                    </div>
+                  </div>
+                  <div>
+                    <div class="wizard-card" data-rule="uploadItem">
+                      <div class="wizard-card-content">
+                        <div class="upload-block d-flex align-items-center justify-content-between">
+                          <span class="file-chosen">Upload Form</span>
+                          <label class="form__upload">
+                            <input type="file" class="actual-btn" data-rule>
+                            <span class="btn-upload">Upload File</span>
+                          </label>                           
+                        </div>
+                      </div>
+                      <div class="wizard-card-footer">
+                        <label class="form__checkbox">
+                          <input type="checkbox" name="check" checked>
+                          <span class="checkmark"></span>
+                          Ignore duplicate fieldname warnings
+                        </label>                         
+                      </div>
+                    </div>                    
+                  </div>
+                  <div class="info">
+                    <div class="icon">
+                      <img src="./img/info-icon.svg" alt="">
+                    </div>
+                    <p>To import the PDF form it must already contain interactive form fields. 
+                    Fields can be added to your PDF using Adobe Acrobat Pro or Adobe Designer. 
+                    Once form fields have been added to the PDF, you can import it here and a database and processing scripts will be automatically generated.</p>
+                  </div>                  
+              </div>               
+              <div class="wizard-content step-9" data-step="9">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>Import your PDF Form</p>
@@ -558,7 +632,7 @@
                             </div>                    
                           </div>
                           <div class="d-flex">
-                            <input type="radio" name="import-pdf" data-rule value="useTemplate">
+                            <input type="radio" name="import-pdf" data-rule value="importPDF">
                             <span class="radion-btn"></span>                    
                           </div>
                         </label>
@@ -575,7 +649,7 @@
                             </div>                    
                           </div>
                           <div class="d-flex">
-                            <input type="radio" name="import-pdf" data-rule value="blackCanvas">
+                            <input type="radio" name="import-pdf" data-rule value="importFormStructure">
                             <span class="radion-btn"></span>                    
                           </div>
                         </label>
@@ -583,45 +657,6 @@
                     </ul>                    
                   </div>
               </div>
-              <div class="wizard-content step-9" data-step="9">
-                  <div class="wizard-title">
-                    <div class="wizard-inner-title">
-                      <p>Import your PDF Form</p>
-                      <span>Select the PDF form from your hard drive to upload it</span>            
-                    </div>
-                    <div class="icon">
-                      <img src="./img/Question.svg" alt="">
-                    </div>
-                  </div>
-                  <div>
-                    <div class="wizard-card">
-                      <div class="wizard-card-content">
-                        <div class="upload-block d-flex align-items-center justify-content-between">
-                          <span class="file-chosen">Upload Form</span>
-                          <label class="form__upload">
-                            <input type="file" class="actual-btn">
-                            <span class="btn-upload">Upload File</span>
-                          </label>                           
-                        </div>
-                      </div>
-                      <div class="wizard-card-footer">
-                        <label class="form__checkbox">
-                          <input type="checkbox" name="check" checked>
-                          <span class="checkmark"></span>
-                          Ignore duplicate fieldname warnings
-                        </label>                         
-                      </div>
-                    </div>                    
-                  </div>
-                  <div class="info">
-                    <div class="icon">
-                      <img src="./img/info-icon.svg" alt="">
-                    </div>
-                    <p>To import the PDF form it must already contain interactive form fields. 
-                    Fields can be added to your PDF using Adobe Acrobat Pro or Adobe Designer. 
-                    Once form fields have been added to the PDF, you can import it here and a database and processing scripts will be automatically generated.</p>
-                  </div>                  
-              </div> 
               <div class="wizard-content step-10" data-step="10">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
@@ -632,38 +667,38 @@
                       <img src="./img/Question.svg" alt="">
                     </div>
                   </div>
-                  <div>
+                  <div class="block-encryprion-option">
                     <div class="wizard-card">
-                      <div class="wizard-card-content">
-                      <div class="form-group">
-                        <label for="">Encryption Level</label>
-                        <select name="select" class="selectElement" data-rule="notEmpty">
-                          <option value="" >None</option>
-                          <option value="ua">Ukrainian</option>
-                          <option value="en">English</option>
-                        </select>
-                      </div>                         
-                      <div class="form-group">
-                        <label for="">Owner Password</label>
-                        <input type="text" placeholder="Personalized Order Form" data-rule="notEmpty">
-                      </div>
-                      <div class="form-group">
-                        <label for="">User Password</label>
-                        <input type="text" placeholder="User Password" data-rule="notEmpty">
-                      </div>                        
+                      <div class="wizard-card-content d-flex flex-column">
+                        <div class="form-group">
+                          <label for="">Encryption Level</label>
+                          <select name="select" class="selectElement" data-rule="notEmpty">
+                            <option value="" >None</option>
+                            <option value="ua">Ukrainian</option>
+                            <option value="en">English</option>
+                          </select>
+                        </div>                         
+                        <div class="form-group">
+                          <label for="">Owner Password</label>
+                          <input type="text" placeholder="Personalized Order Form" data-rule="notEmpty">
+                        </div>
+                        <div class="form-group">
+                          <label for="">User Password</label>
+                          <input type="text" placeholder="User Password" data-rule="notEmpty">
+                        </div>                        
                       </div>
                     </div>
                   </div>
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
-                      <p>Populated PDF Encryption Option</p>
-                      <span>Configure the populated PDF encryption settings</span>            
+                      <p>Permissions</p>
+                      <span>The permissions will be applied to the populated PDF, generated for each form submission</span>            
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
                     </div>
                   </div>                  
-                  <div>
+                  <div class="block-permissions">
                     <div class="wizard-card">
                       <div class="wizard-card-content">
                         <ul class="check-list two-columns">
@@ -817,7 +852,7 @@
                   </div>
                 </div>
                 <div class="wizard-footer d-flex justify-content-between">
-                  <button class="btn btn-secondary">Page 1</button>
+                  <button class="btn btn-secondary autowidth">Page 1</button>
                   <button class="btn btn-secondary">Add page</button>              
                 </div>                                 
               </div>
@@ -851,7 +886,7 @@
                     </div>
                   </div>                                      
                 </div>
-                <div class="wizard-inner-content">
+                <div class="wizard-inner-content" style="background: #eef0f8;">
                   <div class="wizard-content">
                     <div class="information-block">
                       <div class="icon">
@@ -1125,9 +1160,9 @@
         </div>      
     </div>
   </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./js/index.bundle.js"></script>
   <script src="./js/wizard.bundle.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jstree@3.3.16/dist/jstree.min.js"></script>
   <script>
     $('#kt_tree_2').jstree({
@@ -1148,16 +1183,16 @@
     });   
 
     // handle link clicks in tree nodes(support target="_blank" as well)
-    $('#kt_tree_2').on('select_node.jstree', function(e, data) {
-        var link = $('#' + data.selected).find('a');
-        if (link.attr("href") != "#" && link.attr("href") != "javascript:;" && link.attr("href") != "") {
-            if (link.attr("target") == "_blank") {
-                link.attr("href").target = "_blank";
-            }
-            document.location.href = link.attr("href");
-            return false;
-        }
-    });
+    // $('#kt_tree_2').on('select_node.jstree', function(e, data) {
+    //     var link = $('#' + data.selected).find('a');
+    //     if (link.attr("href") != "#" && link.attr("href") != "javascript:;" && link.attr("href") != "") {
+    //         if (link.attr("target") == "_blank") {
+    //             link.attr("href").target = "_blank";
+    //         }
+    //         document.location.href = link.attr("href");
+    //         return false;
+    //     }
+    // });
     // const c = document.getElementById('createNewFolder');
     // c.addEventListener('click',()=>{
     //   var position = 'inside';

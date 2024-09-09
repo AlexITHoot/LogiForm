@@ -145,8 +145,18 @@ activeStepIndex = 5;
 const wizard = document.querySelector('.wizard-page');
 // const steps = wizard.querySelectorAll('.wizard-step');
 // const steps = wizard.querySelectorAll('.wizard-content');
+
+//Common fields
 const commonFields = wizard.querySelectorAll('.wizard-left-side .common-fields li button');
 const commonFieldsDraggable = wizard.querySelector('#items');
+
+const commonFieldsSelect = wizard.querySelector('.wizard-left-side [name="common-fields"]');
+commonFields.forEach((el) => {
+  var opt = document.createElement('option');
+  opt.value = el.dataset.clone;
+  opt.innerHTML = el.innerHTML;
+  commonFieldsSelect.appendChild(opt);
+})
 
 const changeButtonText = () => {
   const b = commonFieldsDraggable.querySelectorAll('li button');
@@ -162,6 +172,14 @@ commonFields.forEach(el => {
     el.disabled = true;
     displayedInformationBlock();
     changeButtonText();
+
+    commonFieldsSelect.querySelectorAll('option').forEach((item) => {
+      if (item.value === el.dataset.clone) {
+        item.setAttribute('checked', 'checked');
+      }
+    })
+
+    commonFieldsSelect.dispatchEvent(new Event('change'));
   })
 })
 
@@ -176,6 +194,14 @@ commonFieldsDraggable.addEventListener('click', (e) => {
     })
     e.target.parentElement.remove();
     displayedInformationBlock();
+
+    commonFieldsSelect.querySelectorAll('option').forEach((item) => {
+      if (item.value === e.target.dataset.clone) {
+        item.removeAttribute('checked');
+      }
+    })
+
+    commonFieldsSelect.dispatchEvent(new Event('change'));
   }
 })
 
@@ -224,21 +250,26 @@ steps.forEach(el => {
 const treeList = wizard.querySelectorAll('#kt_tree_2 ul li');
 treeList.forEach(el => {
   const params = JSON.parse(el.dataset.jstree);
-  console.log('Tree', params.selected);
 })
 
 
 
 
 const fillProgressBar = () => {
-  console.log(`${(100 / activeStepIndex) * (stepIndex)}%`);
-  
-  progressBar.style.width = `${(100 / activeStepIndex) * (stepIndex+1)}%`
+  progressBar.style.width = `${(100 / activeStepIndex) * (stepIndex + 1)}%`
 }
 fillProgressBar();
 
 const notEmpty = (el) => {
   return el.value != null && el.value != "";
+};
+
+const multiSelectNotEmpty = (el) => {
+  for (let index = 0; index < el.options.length; index++) {
+    if (el.options[index].hasAttribute('checked')) {
+      return true;
+    }
+  }
 };
 
 const chooseItem = (el) => {
@@ -254,43 +285,44 @@ const chooseItem = (el) => {
   return false;
 };
 
-const selectItem = (el) => {
-  const items = el.querySelectorAll('[aria-selected]');
-  console.log('si', items);
+const selectTree = (el) => {
+  const selectedItems = $(el).jstree('get_selected');
 
-  for (let index = 0; index < items.length; index++) {
-    const r = items[index].checked;
-    if (r) {
+  return selectedItems.length > 0;
+}
+
+const selectTemplate = (el) => {
+  const item = el.querySelector('[data-rule]');
+  if (item.hasChildNodes()) {
+    return true;
+  }
+  return false;
+}
+
+const uploadItem = (el) => {
+  const items = el.querySelectorAll('[data-rule]');
+  items.forEach(item => {
+    if (item.value) {
       return true;
     }
-  }
-
-  return false;
+    return false;
+  })
 }
 
 const validate = (el) => {
   const rule = el.getAttribute('data-rule');
-
-  console.log('validate rule', rule);
-  console.log('validate value', el.value);
-
   return eval(`${rule}(el)`);
 }
 
 const onChange = (e) => {
-  console.log('onChange stepIndex', stepIndex);
-
-
   let stepValid = true;
-  var itemsToValidate = steps[stepIndex].querySelectorAll('[data-rule]');
+  var itemsToValidate = activeSteps[stepIndex].querySelectorAll('[data-rule]');
 
   itemsToValidate.forEach(el => {
     const attributeVale = el.getAttribute('data-rule');
     if (attributeVale == null || attributeVale == '' || el.disabled) {
       return;
     }
-
-    console.log('itemsToValidate attributeVale', attributeVale);
 
     const r = validate(el);
     if (!r) {
@@ -300,6 +332,12 @@ const onChange = (e) => {
 
   nextStepBtn.disabled = !stepValid;
 }
+
+const uploadInputs = wizard.querySelectorAll('input[data-rule][type="file"]');
+
+uploadInputs.forEach(el => {
+  el.addEventListener('change', onChange);
+});
 
 const inputs = wizard.querySelectorAll('input[data-rule][type="text"]')
 
@@ -312,6 +350,8 @@ const selects = wizard.querySelectorAll('select[data-rule]')
 selects.forEach(el => {
   el.addEventListener('change', onChange);
 });
+
+$('#kt_tree_2').on('select_node.jstree', onChange);
 
 const radioBtns = wizard.querySelectorAll('input[data-rule][type="radio"]');
 
@@ -329,6 +369,10 @@ radioBtns.forEach(el => {
           element.classList.contains('step-3')) {
           element.classList.add('active-step');
           activeSteps = wizard.querySelectorAll('.active-step');
+          activeStepIndex = 5;
+          nextStepBtn.innerHTML = 'Next';
+          numberOfSteps.innerHTML = activeStepIndex;
+          fillProgressBar();
         }
       })
 
@@ -344,7 +388,10 @@ radioBtns.forEach(el => {
           element.classList.contains('step-4')) {
           element.classList.add('active-step');
           activeSteps = wizard.querySelectorAll('.active-step');
-          activeStepIndex=activeSteps.length;
+          activeStepIndex = activeSteps.length;
+          nextStepBtn.innerHTML = 'Next';
+          numberOfSteps.innerHTML = activeStepIndex;
+          fillProgressBar();
         }
       })
     } else if (el.value === 'blackCanvas') {
@@ -360,7 +407,10 @@ radioBtns.forEach(el => {
           element.classList.contains('step-5')) {
           element.classList.add('active-step');
           activeSteps = wizard.querySelectorAll('.active-step');
-          activeStepIndex=activeSteps.length;
+          activeStepIndex = activeSteps.length;
+          nextStepBtn.innerHTML = 'Next';
+          numberOfSteps.innerHTML = activeStepIndex;
+          fillProgressBar();
         }
       })
     } else if (el.value === 'aiForm') {
@@ -374,8 +424,10 @@ radioBtns.forEach(el => {
           element.classList.contains('step-6')) {
           element.classList.add('active-step');
           activeSteps = wizard.querySelectorAll('.active-step');
-          console.log('Active steps 2', activeSteps);
-          activeStepIndex=activeSteps.length;
+          activeStepIndex = activeSteps.length;
+          nextStepBtn.innerHTML = 'Generate';
+          numberOfSteps.innerHTML = activeStepIndex;
+          fillProgressBar();
         }
       })
     } else if (el.value === 'htmlForm') {
@@ -390,7 +442,10 @@ radioBtns.forEach(el => {
           element.classList.contains('step-7')) {
           element.classList.add('active-step');
           activeSteps = wizard.querySelectorAll('.active-step');
-          activeStepIndex=activeSteps.length;
+          activeStepIndex = activeSteps.length;
+          nextStepBtn.innerHTML = 'Next';
+          numberOfSteps.innerHTML = activeStepIndex;
+          fillProgressBar();
         }
       })
     } else if (el.value === 'pdfForm') {
@@ -402,10 +457,16 @@ radioBtns.forEach(el => {
           element.classList.contains('step-1') ||
           element.classList.contains('step-2') ||
           element.classList.contains('step-4') ||
-          element.classList.contains('step-9')) {
+          element.classList.contains('step-8') ||
+          element.classList.contains('step-9') ||
+          element.classList.contains('step-10') ||
+          element.classList.contains('step-11')) {
           element.classList.add('active-step');
           activeSteps = wizard.querySelectorAll('.active-step');
-          activeStepIndex=activeSteps.length;
+          activeStepIndex = activeSteps.length;
+          nextStepBtn.innerHTML = 'Next';
+          numberOfSteps.innerHTML = activeStepIndex;
+          fillProgressBar();
         }
       })
     }
@@ -414,8 +475,10 @@ radioBtns.forEach(el => {
       chooseTypeForm.classList.remove('active');
       chooseTypeForm.querySelector('[data-rule]').disabled = true;
       selectedTemplate.classList.add('active');
+      selectedTemplate.querySelector('[data-rule]').disabled = false;
     } else if (el.value == 'blackCanvas') {
       selectedTemplate.classList.remove('active');
+      selectedTemplate.querySelector('[data-rule]').disabled = true;
       chooseTypeForm.classList.add('active');
       chooseTypeForm.querySelector('[data-rule]').disabled = false;
     }
@@ -428,7 +491,12 @@ radioBtns.forEach(el => {
       importFromUrl.classList.add('active');
     }
   })
+
+  onChange();
 });
+
+selectedTemplate.querySelector('[data-rule]').disabled = true;
+chooseTypeForm.querySelector('[data-rule]').disabled = true;
 
 const prevStepBtnText = () => {
   if (stepIndex >= 1) {
@@ -439,44 +507,47 @@ const prevStepBtnText = () => {
 }
 
 const nextStepBtnText = () => {
-  if (stepIndex == steps.length - 1) {
+  if (stepIndex == activeSteps.length - 1 && activeSteps.length > 3) {
     nextStepBtn.innerHTML = 'Finish';
-  } else {
+  }
+  // else if (stepIndex == activeSteps.length - 1 && activeSteps.getAttribute('data-step') == 6) {
+  //   nextStepBtn.innerHTML = 'Generate';
+  // } 
+  else {
     nextStepBtn.innerHTML = 'Next';
   }
 }
 
 
 nextStepBtn.addEventListener('click', () => {
-  
+
   if (stepIndex < activeSteps.length - 1) {
     // const currentStep = steps[stepIndex];
-    
+
     // const nextStepParamsRaw = currentStep.getAttribute('data-next-step');
     // const nextStepParams = JSON.parse(nextStepParamsRaw);
-    
+
     // let nextStepIndex;
     // if (nextStepParams.element) {
-      
+
     //   const elementValue = currentStep.querySelector(`[name="${nextStepParams.element}"]:checked`).value;
     //   nextStepIndex = nextStepParams.stepIndex[elementValue];
     // } else {
-      //   nextStepIndex = nextStepParams.stepIndex;
-      // }
-      
-      activeSteps[stepIndex].classList.remove("show");
-      activeSteps[stepIndex + 1].classList.add("show");
-      stepIndex++;
-      stepProgress.innerHTML = stepIndex+1;
-      prevStepBtnText();
-      nextStepBtnText();
-      fillProgressBar();
-      onChange();
-      stepBackground();
-      displayWizardRightSide();
-      console.log('active step!!!!', activeSteps[stepIndex].dataset.step);
-      numberOfSteps.innerHTML = activeStepIndex;
-      console.log('STEPINDEX',stepIndex);
+    //   nextStepIndex = nextStepParams.stepIndex;
+    // }
+
+
+    activeSteps[stepIndex].classList.remove("show");
+    activeSteps[stepIndex + 1].classList.add("show");
+    stepIndex++;
+    stepProgress.innerHTML = stepIndex + 1;
+    prevStepBtnText();
+    nextStepBtnText();
+    fillProgressBar();
+    stepBackground();
+    displayWizardRightSide();
+    onChange();
+    numberOfSteps.innerHTML = activeStepIndex;
   }
 
 })
@@ -486,15 +557,14 @@ prevStepBtn.addEventListener('click', () => {
     activeSteps[stepIndex].classList.remove("show");
     activeSteps[stepIndex - 1].classList.add("show");
     stepIndex--;
-    stepProgress.innerHTML = stepIndex+1;
+    stepProgress.innerHTML = stepIndex + 1;
     prevStepBtnText();
     nextStepBtnText();
     fillProgressBar();
     stepBackground();
     displayWizardRightSide();
-    console.log('active step!!!!', activeSteps);
+    onChange();
     numberOfSteps.innerHTML = activeStepIndex;
-    console.log('STEPINDEX',stepIndex);
   }
 })
 
@@ -502,17 +572,17 @@ prevStepBtn.addEventListener('click', () => {
 //
 
 const stepBackground = () => {
-  // if (stepIndex == 0) {
-  //   wizard.style.background = `url('./img/wizard-bg-1.png') no-repeat center right -68px`;
-  // } else if (stepIndex == 1) {
-  //   wizard.style.background = `url('../../img/wizard-bg-2.png') no-repeat center right -535px`;
-  // } else if (stepIndex == 2) {
-  //   wizard.style.background = `url('../../img/wizard-bg-3.png') no-repeat center right`;
-  // } else if (stepIndex == 3) {
-  //   wizard.style.background = `url('../../img/wizard-bg-4.png') no-repeat center right`;
-  // } else {
-  //   wizard.style.background = `none`
-  // }
+  if (stepIndex == 0) {
+    wizard.style.background = `url('./img/wizard-bg-1.png') no-repeat center right -68px`;
+  } else if (stepIndex == 1) {
+    wizard.style.background = `url('../../img/wizard-bg-2.png') no-repeat center right -535px`;
+  } else if (stepIndex == 2) {
+    wizard.style.background = `url('../../img/wizard-bg-3.png') no-repeat center right`;
+  } else if (stepIndex == 3) {
+    wizard.style.background = `url('../../img/wizard-bg-4.png') no-repeat center right`;
+  } else {
+    wizard.style.background = `none`
+  }
 }
 stepBackground();
 
@@ -569,6 +639,7 @@ useTemplate.forEach((el) => {
     selectTemplateTitle.innerText = text;
     selectTemplateIcon.innerHTML = img;
     handleTemplatePage();
+    onChange();
   })
 })
 
@@ -594,6 +665,8 @@ sentButton.addEventListener('click', () => {
 
 // showing loading
 function displayLoading() {
+  chatContent[0].classList.add('hide');
+  chatContent[1].classList.remove('hide');
   responseProgress.classList.remove("hide");
   informationBlock[1].style.display = "none";
   chart.render();
@@ -604,11 +677,13 @@ function displayLoading() {
   }, 2000);
 }
 
+const chatContent = document.querySelectorAll('.wizard-inner-content');
+
 const showContentAfterGetResponse = () => {
   wizardRightSideStepContent.forEach(el => {
     if (el.dataset.stepPage == 6) {
-      el.querySelector('.wizard-header').classList.remove('hide');
-      el.querySelector('.chat-text-response').classList.remove('hide');
+      chatContent[0].classList.remove('hide');
+      chatContent[1].classList.add('hide');
     }
   })
 }
