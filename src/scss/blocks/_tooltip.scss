@@ -1,0 +1,26 @@
+.tooltip {
+  position: absolute;
+  visibility: hidden;
+  width: max-content;
+  max-width: 200px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  background: var(--grey);
+  color: var(--main-white);
+  top: 50%;
+  transform: translateY(-50%);
+  right: calc(100% + 5px);
+  transition: 0.2s;
+  opacity: 0;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--grey);
+  }
+}

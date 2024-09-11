@@ -14,8 +14,8 @@
     <div name="myForm"  class="wizard">
 
         <div class="row no-gutter d-flex h-100">
-          <div class="col-6 flex-column">
-            <div class="wizard-left-side bg-white box-shadow border-right z-index">
+          <div class="col-6 flex-column" style="z-index:1;">
+            <div class="wizard-left-side bg-white box-shadow border-right">
               <div class="wizard-header">
                 <div class="wizard-header-title">
                   <div class="close">
@@ -38,6 +38,9 @@
                   </div>
                   <div class="icon">
                     <img src="./img/Question.svg" alt="">
+                    <div class="tooltip">
+                      <span class="tooltiptext">Tooltip text</span>
+                    </div>                    
                   </div>
                 </div>
                 <div class="inner-content">
@@ -63,6 +66,9 @@
                   </div>
                   <div class="icon">
                     <img src="./img/Question.svg" alt="">
+                    <div class="tooltip">
+                      <span class="tooltiptext">Tooltip text</span>
+                    </div>                     
                   </div>
                 </div>
                 <div>
@@ -146,6 +152,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>
                   <div>
@@ -255,6 +264,9 @@
                   </div>
                   <div class="icon">
                     <img src="./img/Question.svg" alt="">
+                    <div class="tooltip">
+                      <span class="tooltiptext">Tooltip text</span>
+                    </div>                     
                   </div>
                 </div>
                 <div class="wizard-card d-flex flex-column flex-grow">
@@ -310,6 +322,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                 </div>
                 <div class="wizard-card overflow-auto">
@@ -447,7 +462,8 @@
                         <button class="btn btn-secondary" data-clone="newsletterOption">Add</button>
                       </li>
                     </ul>
-                    <select type="hidden" multiple name="common-fields" data-rule="multiSelectNotEmpty" style="display: none;"></select>
+                    <div name="common-fields" data-rule="anyNotEmpty" style="display: none;"></div>
+                    <!-- <select type="hidden" multiple name="common-fields" data-rule="multiSelectNotEmpty" style="display: none;"></select> -->
                 </div>                   
               </div> 
               <div class="wizard-content step-6" data-step="6">
@@ -458,6 +474,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>
                   <div class="chat-wrapper">
@@ -496,6 +515,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>
                   <div>
@@ -504,7 +526,7 @@
                         <label class="form-radio">
                           <div class="element">
                             <div class="icon">
-                              <img src="./img/UseTemplate-icon.svg" alt="">
+                              <img src="../img/UploadFromLocalHD-icon.svg" alt="">
                             </div>
                             <div class="element-title">
                               <p>Upload From My Hard Drive</p>
@@ -521,7 +543,7 @@
                         <label class="form-radio">
                           <div class="element">
                             <div class="icon">
-                              <img src="./img/StartWithBlackCanvas-icon.svg" alt="hdLocal">
+                              <img src="./img/URLPathToForm-icon.svg" alt="hdLocal">
                             </div>
                             <div class="element-title">
                               <p>Enter URL path to the form</p>
@@ -542,12 +564,12 @@
                         <p>Select from your local hard drive</p>
                       </div>
                     </div>                     
-                    <div class="wizard-card" data-rule="uploadItem">
+                    <div class="wizard-card">
                       <div class="wizard-card-content">
                         <div class="upload-block d-flex align-items-center justify-content-between">
                           <span class="file-chosen">Upload Form</span>
                           <label class="form__upload">
-                            <input type="file" class="actual-btn" data-rule>
+                            <input type="file" class="actual-btn" data-rule="uploadItem">
                             <span class="btn-upload">Upload File</span>
                           </label>   
                         </div>
@@ -560,10 +582,10 @@
                         <p>Enter the URL path to the form</p>
                       </div>
                     </div>                     
-                    <div class="wizard-card" data-rule="notEmpty">
+                    <div class="wizard-card">
                       <div class="wizard-card-content">
                         <div class="form-group">
-                          <input type="text" placeholder="Enter URL" data-rule>
+                          <input type="text" placeholder="Enter URL"  data-rule="notEmpty">
                         </div>
                       </div>
                     </div>
@@ -577,15 +599,18 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>
                   <div>
-                    <div class="wizard-card" data-rule="uploadItem">
+                    <div class="wizard-card">
                       <div class="wizard-card-content">
                         <div class="upload-block d-flex align-items-center justify-content-between">
                           <span class="file-chosen">Upload Form</span>
                           <label class="form__upload">
-                            <input type="file" class="actual-btn" data-rule>
+                            <input type="file" class="actual-btn" data-rule="uploadItem">
                             <span class="btn-upload">Upload File</span>
                           </label>                           
                         </div>
@@ -616,6 +641,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>
                   <div>
@@ -665,12 +693,15 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>
                   <div class="block-encryprion-option">
                     <div class="wizard-card">
                       <div class="wizard-card-content d-flex flex-column">
-                        <div class="form-group">
+                        <div class="form-group" style="max-width: 285px;">
                           <label for="">Encryption Level</label>
                           <select name="select" class="selectElement" data-rule="notEmpty">
                             <option value="" >None</option>
@@ -696,6 +727,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>                  
                   <div class="block-permissions">
@@ -764,6 +798,9 @@
                     </div>
                     <div class="icon">
                       <img src="./img/Question.svg" alt="">
+                      <div class="tooltip">
+                        <span class="tooltiptext">Tooltip text</span>
+                      </div>                       
                     </div>
                   </div>                
                   <div>
@@ -788,7 +825,7 @@
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div style="margin-top:38px">
                     <div class="wizard-title">
                       <div class="wizard-inner-title">          
                         <p>Select from your local hard drive</p>
@@ -831,6 +868,7 @@
           </div>
           <div class="col-6 flex-column">
             <div class="wizard-right-side hide">
+              <div class="wizard-step-content" data-step-page="1"></div>
               <div class="wizard-step-content bg-white h-100" data-step-page="5">
                 <div class="wizard-header step-1">
                   <div class="wizard-header-title">
@@ -1160,6 +1198,28 @@
         </div>      
     </div>
   </main>
+  <div class="modal-wrapper">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="moda-title">
+          <p>Create New Project Folder</p>
+        </div>
+        <div class="close">
+          <img src="./img/Close.svg" alt="">
+        </div>        
+      </div>
+      <div class="modal-content">
+        <div class="form-group">
+          <label for="">Folder Name</label>
+          <input type="text" placeholder="Enter Folder Name">
+        </div>      
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary cancel">Cancel</button>
+        <button class="btn btn-primary create">Create</button>
+      </div>
+    </div>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./js/index.bundle.js"></script>
   <script src="./js/wizard.bundle.js"></script>
@@ -1172,7 +1232,7 @@
             }
         },
         "types": {
-            "default": {
+            "222": {
                 "icon": "fa fa-folder text-warning"
             },
             "file": {

@@ -135,25 +135,9 @@
 }
 
 .wizard-step {
-  // display: none;
-  // display: flex;
   flex-direction: column;
   height: 100%;
   flex-shrink: 0;
-
-  // &.step-1 {
-  //   background: url('../../img/wizard-bg-1.png') no-repeat center right -68px;
-  // }
-
-  // &.step-2 {
-  //   background: url('../../img/wizard-bg-2.png') no-repeat center right -535px;
-  // }
-
-  // &.step-3 {
-  //   background: url('../../img/wizard-bg-3.png') no-repeat center right;
-  // }
-
-
 
   &.show {
     display: flex;
@@ -161,7 +145,7 @@
 }
 
 .wizard-header {
-  height: 70px;
+  min-height: 70px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -169,6 +153,7 @@
   gap: 15px;
   padding: 15px;
   border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
 
   .wizard-header-title {
     display: flex;
@@ -226,6 +211,55 @@
   padding: 15px;
   overflow: auto;
 
+  &:after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &.step-1 {
+    &:after {
+      background: url('../../img/wizard-bg-1.png') no-repeat center right -68px;
+    }
+  }
+
+  &.step-2 {
+    &:after {
+      background: url('../../img/wizard-bg-2.png') no-repeat center right -535px;
+    }
+  }
+
+  &.step-3 {
+    &:after {
+      background: url('../../img/wizard-bg-3.png') no-repeat center right;
+    }
+  }
+
+  &.step-4 {
+    &:after {
+      background: url('../../img/wizard-bg-4.png') no-repeat center right;
+    }
+  }
+
+  &.step-7 {
+    &:after {
+      background: url('../../img/wizard-bg-5.png') no-repeat center right -535px;
+    }
+  }
+
+  &.step-8,
+  &.step-9,
+  &.step-10,
+  &.step-11 {
+    &:after {
+      background: url('../../img/wizard-bg-6.png') no-repeat top -130px right;
+    }
+  }
 
   .wizard-title {
     display: flex;
@@ -248,10 +282,19 @@
     }
 
     .icon {
+      position: relative;
       display: flex;
       border-radius: var(--border-radius);
       padding: 6px;
       background: var(--bg-secondary);
+      cursor: pointer;
+
+      &:hover {
+        .tooltip {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
     }
   }
 
@@ -552,6 +595,7 @@
   padding: 15px;
   border-top: 1px solid var(--border-color);
   flex-shrink: 0;
+  gap: 15px;
 
   .btn {
     width: 100%;

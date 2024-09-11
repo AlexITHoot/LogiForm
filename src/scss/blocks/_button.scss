@@ -6,8 +6,11 @@
   gap: 10px;
   padding: 10px 16px;
   border-radius: var(--border-radius);
-  flex-shrink: 0;
   transition: 0.2s;
+
+  &.shrink {
+    flex-shrink: 0;
+  }
 
   &:disabled {
     background: var(--stroke);

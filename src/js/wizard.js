@@ -150,13 +150,14 @@ const wizard = document.querySelector('.wizard-page');
 const commonFields = wizard.querySelectorAll('.wizard-left-side .common-fields li button');
 const commonFieldsDraggable = wizard.querySelector('#items');
 
-const commonFieldsSelect = wizard.querySelector('.wizard-left-side [name="common-fields"]');
-commonFields.forEach((el) => {
-  var opt = document.createElement('option');
-  opt.value = el.dataset.clone;
-  opt.innerHTML = el.innerHTML;
-  commonFieldsSelect.appendChild(opt);
-})
+const commonFieldsDv = wizard.querySelector('.wizard-left-side [name="common-fields"]');
+//const commonFieldsSelect = wizard.querySelector('.wizard-left-side [name="common-fields"]');
+// commonFields.forEach((el) => {
+//   var opt = document.createElement('option');
+//   opt.value = el.dataset.clone;
+//   opt.innerHTML = el.innerHTML;
+//   commonFieldsSelect.appendChild(opt);
+// })
 
 const changeButtonText = () => {
   const b = commonFieldsDraggable.querySelectorAll('li button');
@@ -167,21 +168,105 @@ const changeButtonText = () => {
 
 commonFields.forEach(el => {
   el.addEventListener('click', () => {
-    commonFieldsDraggable.appendChild(el.parentElement.cloneNode(true));
-    el.textContent = 'Added';
-    el.disabled = true;
-    displayedInformationBlock();
+    //const clone = el.parentElement.cloneNode(true);
+    //const cloneBtn = clone.querySelector('.btn');
+    //cloneBtn.setAttribute('data-page', commonFieldsPage);
+    //cloneBtn.setAttribute('data-page-item', commonFieldsPageItem);
+    //commonFieldsDraggable.appendChild(clone);
+
+    //el.textContent = 'Added';
+    //el.disabled = true;
     changeButtonText();
 
-    commonFieldsSelect.querySelectorAll('option').forEach((item) => {
-      if (item.value === el.dataset.clone) {
-        item.setAttribute('checked', 'checked');
-      }
-    })
+    // commonFieldsSelect.querySelectorAll('option').forEach((item) => {
+    //   if (item.value === el.dataset.clone) {
+    //     item.setAttribute('checked', 'checked');
+    //   }
+    // })
 
-    commonFieldsSelect.dispatchEvent(new Event('change'));
+    //commonFieldsSelect.dispatchEvent(new Event('change'));
+
+    var inpt = document.createElement(`input`);
+    inpt.setAttribute('name', `common-fields[${commonFieldsPage}][${commonFieldsPageItemValue}]`);
+    inpt.setAttribute('type', 'hidden');
+    inpt.setAttribute('data-rule', '');
+    inpt.setAttribute('data-page', commonFieldsPage);
+    inpt.setAttribute('data-page-item', commonFieldsPageItemValue);
+    const elName = el.parentElement.querySelector('.field-title span').textContent;
+    inpt.setAttribute('data-name', elName);
+    inpt.value = el.dataset.clone;
+    commonFieldsDv?.appendChild(inpt);
+
+    renderCommonFieldsDraggable();
+    updateCommonFieldsButtons();
   })
 })
+
+const updateCommonFieldsButtons = () => {
+  commonFields.forEach((el) => {
+
+    console.log('commonFields', el)
+    const inpt = commonFieldsDv.querySelector(`input[name^="common-fields[${commonFieldsPage}]["][value="${el.dataset.clone}"]`);
+
+    console.log('commonFields input', inpt)
+    if (inpt) {
+      el.disabled = true;
+      el.textContent = 'Added'
+    } else {
+      el.disabled = false;
+      el.textContent = 'Add'
+    }
+
+    onChange();
+  })
+
+  // commonFieldsDv.querySelectorAll('input').forEach((el) => {
+  //   //const inpt = commonFieldsDv.querySelector(`input[name="common-fields[${el.dataset.page}][${el.dataset.pageItem}]"]`)
+  //   const btn = commonFields.querySelector(`[data-clone="${el.value}"]`)
+  //   if (btn) {
+  //     el.disabled = true;
+  //   } else {
+  //     el.disabled = false;
+  //   }
+  // });
+
+  displayedInformationBlock();
+}
+
+const renderCommonFieldsDraggable = () => {
+  commonFieldsDraggable.innerHTML = ''
+  commonFieldsDv.querySelectorAll('input').forEach((el) => {
+    const name = el.dataset.name;
+    const page = el.dataset.page;
+    const pageItem = el.dataset.pageItem;
+    const template = commonFieldsItemTemplate(name, page, pageItem)
+    commonFieldsDraggable?.appendChild(template.content.firstChild);
+  });
+
+  displayedInformationBlock();
+}
+
+const commonFieldsItemTemplate = (name, page, pageItem) => {
+  const template = document.createElement('template');
+  template.innerHTML =
+    `<li>
+      <div class="field-title">
+        <div class="move">
+          <img src="./img/menu.svg" alt="">
+        </div>
+        <div class="icon">
+          <img src="./img/common-fields-icon-1.svg" alt="">
+        </div>
+        <span>${name}</span>
+      </div>
+      <button class="btn btn-secondary" data-page="${page}" data-page-item="${pageItem}">Remove</button>
+    </li>`
+
+  return template;
+};
+
+let commonFieldsPage = 0;
+let commonFieldsPageItemValue = '';
 
 commonFieldsDraggable.addEventListener('click', (e) => {
   if (e.target.classList.contains('btn')) {
@@ -195,13 +280,20 @@ commonFieldsDraggable.addEventListener('click', (e) => {
     e.target.parentElement.remove();
     displayedInformationBlock();
 
-    commonFieldsSelect.querySelectorAll('option').forEach((item) => {
-      if (item.value === e.target.dataset.clone) {
-        item.removeAttribute('checked');
-      }
-    })
+    // commonFieldsSelect.querySelectorAll('option').forEach((item) => {
+    //   if (item.value === e.target.dataset.clone) {
+    //     item.removeAttribute('checked');
+    //   }
+    // })
 
-    commonFieldsSelect.dispatchEvent(new Event('change'));
+    // commonFieldsSelect.dispatchEvent(new Event('change'));
+
+    //console.log('commonFieldsDv', e.target);
+    //console.log('commonFieldsDv', `input[name="common-fields[${e.target.dataset.page}][${e.target.dataset.pageItem}]"]`);
+
+    commonFieldsDv.querySelector(`input[name="common-fields[${e.target.dataset.page}][${e.target.dataset.pageItem}]"]`).remove();
+    renderCommonFieldsDraggable();
+    updateCommonFieldsButtons();
   }
 })
 
@@ -247,14 +339,6 @@ steps.forEach(el => {
   console.log('step check value', el.dataset.nextStep);
 })
 
-const treeList = wizard.querySelectorAll('#kt_tree_2 ul li');
-treeList.forEach(el => {
-  const params = JSON.parse(el.dataset.jstree);
-})
-
-
-
-
 const fillProgressBar = () => {
   progressBar.style.width = `${(100 / activeStepIndex) * (stepIndex + 1)}%`
 }
@@ -267,6 +351,18 @@ const notEmpty = (el) => {
 const multiSelectNotEmpty = (el) => {
   for (let index = 0; index < el.options.length; index++) {
     if (el.options[index].hasAttribute('checked')) {
+      return true;
+    }
+  }
+};
+
+const anyNotEmpty = (el) => {
+  const items = el.querySelectorAll('[data-rule]');
+  console.log('anyNotEmpty', el)
+
+  for (let index = 0; index < items.length; index++) {
+    const r = notEmpty(items[index]);
+    if (r) {
       return true;
     }
   }
@@ -300,13 +396,7 @@ const selectTemplate = (el) => {
 }
 
 const uploadItem = (el) => {
-  const items = el.querySelectorAll('[data-rule]');
-  items.forEach(item => {
-    if (item.value) {
-      return true;
-    }
-    return false;
-  })
+  return el.files.length > 0
 }
 
 const validate = (el) => {
@@ -485,10 +575,14 @@ radioBtns.forEach(el => {
 
     if (el.value == 'hdLocal') {
       importFromUrl.classList.remove('active');
+      importFromUrl.querySelector('[data-rule]').disabled = true;
       importFromLocal.classList.add('active');
+      importFromLocal.querySelector('[data-rule]').disabled = false;
     } else if (el.value == 'urlPath') {
       importFromLocal.classList.remove('active');
+      importFromLocal.querySelector('[data-rule]').disabled = true;
       importFromUrl.classList.add('active');
+      importFromUrl.querySelector('[data-rule]').disabled = false;
     }
   })
 
@@ -497,6 +591,9 @@ radioBtns.forEach(el => {
 
 selectedTemplate.querySelector('[data-rule]').disabled = true;
 chooseTypeForm.querySelector('[data-rule]').disabled = true;
+importFromLocal.querySelector('[data-rule]').disabled = true;
+importFromUrl.querySelector('[data-rule]').disabled = true;
+
 
 const prevStepBtnText = () => {
   if (stepIndex >= 1) {
@@ -544,7 +641,6 @@ nextStepBtn.addEventListener('click', () => {
     prevStepBtnText();
     nextStepBtnText();
     fillProgressBar();
-    stepBackground();
     displayWizardRightSide();
     onChange();
     numberOfSteps.innerHTML = activeStepIndex;
@@ -561,30 +657,11 @@ prevStepBtn.addEventListener('click', () => {
     prevStepBtnText();
     nextStepBtnText();
     fillProgressBar();
-    stepBackground();
     displayWizardRightSide();
     onChange();
     numberOfSteps.innerHTML = activeStepIndex;
   }
 })
-
-
-//
-
-const stepBackground = () => {
-  if (stepIndex == 0) {
-    wizard.style.background = `url('./img/wizard-bg-1.png') no-repeat center right -68px`;
-  } else if (stepIndex == 1) {
-    wizard.style.background = `url('../../img/wizard-bg-2.png') no-repeat center right -535px`;
-  } else if (stepIndex == 2) {
-    wizard.style.background = `url('../../img/wizard-bg-3.png') no-repeat center right`;
-  } else if (stepIndex == 3) {
-    wizard.style.background = `url('../../img/wizard-bg-4.png') no-repeat center right`;
-  } else {
-    wizard.style.background = `none`
-  }
-}
-stepBackground();
 
 const selecteTemplateBtn = wizard.querySelector('.block-selecte-template button');
 const templatePage = wizard.querySelector('.template-page');
@@ -612,6 +689,8 @@ const displayWizardRightSide = () => {
     }
   })
 }
+
+displayWizardRightSide();
 
 const handleTemplatePage = () => {
   if (templatePage.classList.contains('hide')) {
@@ -966,24 +1045,38 @@ const showContentAfterGetResponse = () => {
 //------------------------------------------------------
 
 
-// const checkAnswer = () => {
+//Modal
+const createNewFolder = document.querySelector('#createNewFolder');
+const modal = document.querySelector('.modal-wrapper');
+const closeBtn = document.querySelector('.modal-wrapper .modal-header .close');
+const cancelBtn = document.querySelector('.modal-wrapper .modal-footer .cancel');
+const createBtn = document.querySelector('.modal-wrapper .modal-footer .create');
 
-//   console.log('Check answer');
-// }
+createNewFolder.addEventListener('click', () => {
+  modal.style.display = 'flex';
+})
 
-// let x = document.querySelector('.form-name');
-// console.log('Value', x);
-// const field = document.querySelector('input[data-rule]');
-// console.log('Field', field.value);
+createBtn.addEventListener('click', () => {
+  demo_create();
+  modal.style.display = "none";
+})
 
-
-
-// x.addEventListener('input', () => {
-//   if (x.value) {
-//     nextStepBtn[stepIndex].removeAttribute('disabled', '')
-//   } else {
-//     nextStepBtn[stepIndex].setAttribute('disabled', '')
-//   }
-// })
-
-// const select = document.forms['myForm'].select.value;
+window.onclick = function (event) {
+  if (event.target == modal || event.target == closeBtn || event.target == cancelBtn) {
+    modal.style.display = "none";
+  }
+}
+function demo_create() {
+  $('#kt_tree_2').jstree("create_node", null, null, "last", function (node) {
+    this.edit(node);
+  });
+  return;
+  var ref = $('#kt_tree_2').jstree(true),
+    sel = ref.get_selected();
+  if (!sel.length) { alert('select folder to add after'); }
+  sel = sel[0];
+  sel = ref.create_node(sel, { id: 123, text: "Hello world", "name": "3434", "type": "file" });
+  if (sel) {
+    ref.edit(sel);
+  }
+};

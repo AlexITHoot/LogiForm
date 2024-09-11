@@ -152,3 +152,4 @@ console.log(location.pathname.split("/"))
 //     el.classList.add('active')
 //   })
 // })
+
