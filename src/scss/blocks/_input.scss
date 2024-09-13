@@ -1,0 +1,10 @@
+input {
+  &::placeholder {
+    color: var(--grey);
+    opacity: 1;
+  }
+
+  &::-ms-input-placeholder {
+    color: var(--grey);
+  }
+}

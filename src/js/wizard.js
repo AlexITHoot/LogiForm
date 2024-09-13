@@ -1062,7 +1062,7 @@ createBtn.addEventListener('click', () => {
 })
 
 window.onclick = function (event) {
-  if (event.target == modal || event.target == closeBtn || event.target == cancelBtn) {
+  if (event.target == modal || event.target == closeBtn || event.target == closeBtn.querySelector('img') || event.target == cancelBtn) {
     modal.style.display = "none";
   }
 }

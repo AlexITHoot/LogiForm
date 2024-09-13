@@ -9,13 +9,14 @@
 <body>
   <main class="d-flex">
     @@include('./blocks/sidebar.html')
+    @@include('./blocks/header.html')
     <div class="content">
       <div class="container d-flex align-items-start flex-wrap align-content-start gutter">
         <div class="row">
           <div class="col">
             <div class="card">
               <div class="card-header">
-                <div class="card-title">
+                <div class="card-title small">
                   <div class="icon">
                     <img src="./img/View-icon.svg" alt="">
                   </div>
@@ -352,7 +353,7 @@
             @@include('./blocks/statistic.html')
           </div>
         </div>  
-        <div class="row d-flex gutter">
+        <div class="row d-flex">
           <div class="col col-6">
             @@include('./blocks/most-active-form.html')
           </div>
@@ -361,11 +362,9 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>
+      <div class="overlay"></div>    
   </main>
   <script src="./js/index.bundle.js"></script>
-  <script>
-    // Hu();
-  </script>
 </body>
 </html>

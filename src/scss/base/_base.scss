@@ -6,6 +6,10 @@ body {
 	background-color: var(--bg);
 	color: var(--main-black);
 	font-family: var(--font-main);
+
+	&.active {
+		overflow: hidden;
+	}
 }
 
 main {
@@ -33,26 +37,34 @@ picture {
 }
 
 .row {
-	gap: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	// gap: 15px;
 	flex: 1 1 100%;
+	margin-left: -7.5px;
+	margin-right: -7.5px;
 }
 
 .col {
 	display: flex;
-	flex: 1;
+	flex: 1 0 0%;
+	padding: 0 7.5px;
+}
+
+.col-auto {
+	flex: 0 0 auto;
 }
 
 .col-4 {
-	flex: 1 1 calc((100%/12)*4);
+	flex: 0 1 calc((100%/12)*4);
 }
 
 .col-6 {
-	flex: 0 1 auto;
-	width: 50%;
+	flex: 0 1 calc((100%/12)*6);
 }
 
 .col-8 {
-	flex: 1 1 calc((100%/12)*8);
+	flex: 0 1 calc((100%/12)*8);
 }
 
 .gutter {
@@ -61,6 +73,14 @@ picture {
 
 .no-gutter {
 	gap: 0;
+}
+
+.column-gap {
+	column-gap: 15px;
+}
+
+.row-gap {
+	row-gap: 15px;
 }
 
 .flex-wrap {

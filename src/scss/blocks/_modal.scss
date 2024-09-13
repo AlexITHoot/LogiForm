@@ -38,10 +38,6 @@
         cursor: pointer;
         transition: 0.2s;
 
-        img {
-          pointer-events: none;
-        }
-
         &:hover {
           background: color-mix(in lab, var(--bg-secondary) 90%, var(--blue))
         }

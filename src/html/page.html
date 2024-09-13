@@ -9,6 +9,7 @@
 <body>
   <main class="d-flex">
     @@include('./blocks/sidebar.html')
+    @@include('./blocks/header.html')
     <div class="content">
       <div class="container d-flex align-items-start flex-wrap align-content-start gutter">
         <div class="row">
@@ -31,12 +32,12 @@
               </div>
               <div class="card-content">
                 <div class="row d-flex">
-                  <div class="col">
+                  <div class="col col-auto">
                     <div class="img-cap">
                       <img src="./img/image_2.jpg" alt="">
                     </div>
                   </div>
-                  <div class="col-8">
+                  <div class="col">
                     <div class="tabs">
                       <ul class="nav-tabs">
                         <li class="nav-item">
@@ -170,7 +171,7 @@
             @@include('./blocks/statistic.html')
           </div>
         </div>
-        <div class="row d-flex gutter">
+        <div class="row d-flex">
           <div class="col col-6">
             @@include('./blocks/most-active-form.html')
           </div>
@@ -179,14 +180,10 @@
           </div>
         </div>        
       </div>
-    </div>    
+    </div>
+    <div class="overlay"></div>    
   </main>
   <script src="./js/index.bundle.js"></script>
-  <script src="./js/page.bundle.js"></script>  
-  <script>
-    mainTab()
-      // window.addEventListener('DOMContentLoaded', function () {        
-      // });
-  </script>  
+  <script src="./js/page.bundle.js"></script>   
 </body>
 </html>

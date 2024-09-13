@@ -1,0 +1,49 @@
+header {
+  display: none;
+  background: #34495e;
+  padding: 15px;
+  align-items: center;
+  justify-content: space-between;
+
+  .menu-btn {
+    width: 24px;
+    height: 24px;
+    position: relative;
+
+    span {
+      display: block;
+      position: absolute;
+      border-radius: 3px;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      top: 10px;
+      height: 3px;
+      min-height: 3px;
+      width: 100%;
+      background: var(--main-white);
+
+      &:after,
+      &:before {
+        position: absolute;
+        display: block;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        min-height: 3px;
+        content: "";
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 3px;
+        background: var(--main-white);
+      }
+
+      &:after {
+        top: -8px;
+      }
+
+      &:before {
+        bottom: -8px;
+      }
+    }
+  }
+}

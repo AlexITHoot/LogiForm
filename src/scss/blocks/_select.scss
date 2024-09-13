@@ -47,3 +47,15 @@
     }
   }
 }
+
+select {
+  height: 38px;
+  min-width: 120px;
+  background-color: var(--bg-secondary);
+  border: none;
+  padding: 9px 12px;
+  border-radius: var(--border-radius);
+  outline: none;
+  font-size: 12px;
+  font-weight: 500;
+}

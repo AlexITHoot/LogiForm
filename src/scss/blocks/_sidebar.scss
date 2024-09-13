@@ -4,6 +4,8 @@
   background: var(--paper);
   padding: 15px;
   overflow: auto;
+  z-index: 1001;
+  transition: 0.2s;
 
   ul {
     li {
@@ -65,10 +67,29 @@
       }
     }
   }
+
+  &.active {
+    left: 0;
+  }
 }
 
 .sidebar-header {
   margin-bottom: 24px;
+
+  .close {
+    display: none;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    width: auto;
+    height: auto;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background: color-mix(in lab, var(--bg-secondary) 90%, var(--blue))
+    }
+  }
 }
 
 .input-group {
@@ -96,5 +117,22 @@ hr {
     text-transform: uppercase;
     color: var(--gray);
     margin-bottom: 10px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.1);
+  display: none;
+  transition: 0.2s;
+
+  &.active {
+    display: block;
   }
 }

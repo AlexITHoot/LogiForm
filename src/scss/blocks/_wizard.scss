@@ -10,6 +10,7 @@
   // background: var(--main-white);
   height: 100%;
   overflow: auto;
+  padding: 0 7.5px;
 
   .bg-white {
     background: var(--main-white);
@@ -395,7 +396,7 @@
       border-radius: var(--border-radius);
 
       &::placeholder {
-        color: var(--main-black);
+        color: var(--grey);
       }
     }
 

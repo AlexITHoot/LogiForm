@@ -7,6 +7,8 @@
   padding: 10px 16px;
   border-radius: var(--border-radius);
   transition: 0.2s;
+  font-size: 14px;
+  font-weight: 500;
 
   &.shrink {
     flex-shrink: 0;

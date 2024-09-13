@@ -1,0 +1,45 @@
+// X-Small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+  header {
+    display: flex;
+  }
+
+  main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -265px;
+
+    .sidebar-header {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: flex-end;
+
+      .input-group {
+        display: none;
+      }
+
+      .close {
+        display: inline-flex;
+      }
+    }
+  }
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {}
+
+// X-Large devices (large desktops, less than 1400px)
+@media (max-width: 1399.98px) {}
+
+// XX-Large devices (larger desktops)
+// No media query since the xxl breakpoint has no upper bound on its width

@@ -44,17 +44,17 @@ window.onclick = function (event) {
 }
 
 //Slim select
-import SlimSelect from 'slim-select';
-const allSelect = document.querySelectorAll('.selectElement');
+// import SlimSelect from 'slim-select';
+// const allSelect = document.querySelectorAll('.selectElement');
 
-allSelect.forEach((el) => {
-  new SlimSelect({
-    select: el,
-    settings: {
-      showSearch: false
-    }
-  })
-})
+// allSelect.forEach((el) => {
+//   new SlimSelect({
+//     select: el,
+//     settings: {
+//       showSearch: false
+//     }
+//   })
+// })
 
 // const tabBtn = document.querySelectorAll('.nav-tabs > li');
 
@@ -136,7 +136,59 @@ allSelect.forEach((el) => {
 //   });
 // });
 
-console.log(location.pathname.split("/"))
+
+const menuLinks = document.querySelectorAll('.menu-nav li');
+const path = location.pathname.split("/");
+menuLinks.forEach(el => {
+
+  if (path[path.length - 1] == el.querySelector('a').getAttribute('href') && el.querySelector('a').getAttribute('href') != '') {
+    el.classList.add('active');
+  } else {
+    el.classList.remove('active');
+  }
+})
+
+
+const body = document.querySelector('body');
+const menuBtn = document.querySelector('.menu-btn');
+const sidebar = document.querySelector('.sidebar');
+const closeBtn = document.querySelector('.sidebar-header .close')
+const overlay = document.querySelector('.overlay');
+
+overlay.addEventListener('click', () => {
+  toggleMenu(false);
+})
+
+closeBtn.addEventListener('click', () => {
+  toggleMenu(false);
+})
+
+menuBtn.addEventListener('click', () => {
+  toggleMenu(true)
+})
+
+const toggleMenu = (state) => {
+  if (state) {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    body.classList.add('active');
+  } else {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    body.classList.remove('active');
+  }
+
+}
+
+
+const checkWidth = () => {
+  const windowWidth = window.innerWidth;
+  if (windowWidth >= 992) {
+    toggleMenu(false)
+  }
+}
+
+window.addEventListener('resize', checkWidth)
 
 
 
@@ -152,4 +204,3 @@ console.log(location.pathname.split("/"))
 //     el.classList.add('active')
 //   })
 // })
-
