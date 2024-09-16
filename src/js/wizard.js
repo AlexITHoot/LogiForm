@@ -335,6 +335,7 @@ const progressBar = wizard.querySelector('.progress-bar');
 // stepProgress.innerHTML = 1;
 numberOfSteps.innerHTML = activeStepIndex;
 console.log('stepIndex', stepIndex);
+
 steps.forEach(el => {
   console.log('step check value', el.dataset.nextStep);
 })
@@ -672,10 +673,24 @@ const wizardRightSideStepContent = wizard.querySelectorAll('.wizard-right-side .
 
 
 const displayWizardRightSide = () => {
+  console.log('active steps', activeSteps);
   wizardRightSideStepContent.forEach(el => {
-    if (activeSteps[stepIndex].dataset.step == 5) {
+    el.style.display = 'none';
+    if (activeSteps[stepIndex].dataset.step == 1) {
+      wizardRightSide.classList.remove('hide')
+      if (el.dataset.stepPage == 1) {
+        el.style.display = 'flex';
+      }
+    } else if (activeSteps[stepIndex].dataset.step == 2) {
+      wizardRightSide.classList.remove('hide')
+      if (el.dataset.stepPage == 2) {
+
+        el.style.display = 'flex';
+      }
+    } else if (activeSteps[stepIndex].dataset.step == 5) {
       wizardRightSide.classList.remove('hide')
       if (el.dataset.stepPage == 5) {
+
         el.style.display = 'flex';
       }
     } else if (activeSteps[stepIndex].dataset.step == 6) {
@@ -683,6 +698,8 @@ const displayWizardRightSide = () => {
       if (el.dataset.stepPage == 6) {
         el.style.display = 'flex';
       }
+    } else if (activeSteps[stepIndex].dataset.step == 7) {
+
     } else {
       wizardRightSide.classList.add('hide')
       el.style.display = 'none';

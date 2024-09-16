@@ -67,6 +67,10 @@ picture {
 	flex: 0 1 calc((100%/12)*8);
 }
 
+.col-12 {
+	flex: 0 1 100%;
+}
+
 .gutter {
 	gap: var(--gutter);
 }

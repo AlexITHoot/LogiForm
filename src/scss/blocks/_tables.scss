@@ -34,20 +34,12 @@ table {
           overflow: hidden;
         }
 
-        p {
-          font-size: 15px;
-          font-weight: 600;
-        }
-
-        span {
+        .info-title {
           position: relative;
-          font-size: 12px;
-          font-weight: 400;
-          color: var(--grey);
 
           .badge-list {
             position: absolute;
-            top: 0;
+            top: -20px;
             left: 0;
             display: none;
             align-items: center;
@@ -66,6 +58,20 @@ table {
             }
           }
         }
+
+        p {
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        span {
+          position: relative;
+          font-size: 12px;
+          font-weight: 400;
+          color: var(--grey);
+
+
+        }
       }
 
       .email-address {
@@ -78,11 +84,9 @@ table {
     }
 
     &:hover {
-      cursor: pointer;
-
       td {
         .block-info {
-          span {
+          .info-title {
             .badge-list {
               display: flex;
             }

@@ -61,11 +61,11 @@
 
   .tab-table-row {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
 
     .tab-table-col {
       display: flex;
-      flex: 1 1 50%;
+      flex: 0 0 50%;
       align-items: center;
       gap: 10px;
       padding: 7px 0;
@@ -74,6 +74,11 @@
       color: var(--main-black);
       width: 50%;
       flex-shrink: 0;
+      padding-right: 15px;
+
+      .icon {
+        flex-shrink: 0;
+      }
 
       span {
         overflow: hidden;

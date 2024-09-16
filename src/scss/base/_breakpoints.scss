@@ -2,7 +2,22 @@
 @media (max-width: 575.98px) {}
 
 // Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {}
+@media (max-width: 767.98px) {
+  .tab-table {
+    .tab-table-row {
+      .tab-table-col {
+        flex: 1 1 100%;
+      }
+    }
+  }
+
+  .block-tools {
+    .btn {
+      font-size: 0;
+      gap: 0;
+    }
+  }
+}
 
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991.98px) {
@@ -33,6 +48,10 @@
       }
     }
   }
+
+  .wizard-content:after {
+    background-size: contain !important;
+  }
 }
 
 // Large devices (desktops, less than 1200px)
@@ -43,3 +62,47 @@
 
 // XX-Large devices (larger desktops)
 // No media query since the xxl breakpoint has no upper bound on its width
+
+
+
+
+
+// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .col-sm-6 {
+    flex: 0 1 calc((100%/12)*6);
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .col-lg-auto {
+    flex: 0 0 auto;
+  }
+
+  .col-md-3 {
+    flex: 0 1 calc((100%/12)*3);
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+
+  .col-lg-6 {
+    flex: 0 1 calc((100%/12)*6);
+  }
+
+  .col-lg-9 {
+    flex: 0 1 calc((100%/12)*9);
+  }
+}
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) {}

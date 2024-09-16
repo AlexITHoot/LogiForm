@@ -58,4 +58,13 @@ select {
   outline: none;
   font-size: 12px;
   font-weight: 500;
+
+  &.outlined {
+    height: 46px;
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    background: none;
+    font-size: 14px;
+    font-weight: 400;
+  }
 }

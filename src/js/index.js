@@ -12,22 +12,21 @@
 
 //Dropdown 
 const dropdownBtn = document.querySelectorAll('.dropdown-btn');
-// const cl = document.classList('nav');
-// console.log(cl);
-
 
 dropdownBtn.forEach((el) => {
   el.addEventListener('click', () => {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
     el.nextElementSibling.classList.toggle("show");
   })
-  // el.setListener(el, 'click', () => {
-  //   console.log('Hello world!!!');
-  // })
-})
 
-// function myFunction() {
-//   document.getElementById("myDropdown").classList.toggle("show");
-// }
+})
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
