@@ -1,13 +1,11 @@
 .wizard-page {
-  // background: url('../../img/wizard-bg-1.png') no-repeat center right -68px;
+  overflow: hidden;
 }
 
 .wizard {
   display: flex;
   flex-direction: column;
   width: 100%;
-  // max-width: 50%;
-  // background: var(--main-white);
   height: 100%;
   overflow: auto;
   padding: 0 7.5px;
@@ -43,6 +41,58 @@
 
     &.show {
       display: flex;
+    }
+
+    &:after {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 100%;
+      right: 0;
+      bottom: 0;
+      content: '';
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    &.step-1 {
+      &:after {
+        background: url('../img/wizard-bg-1.png') no-repeat center right -68px;
+      }
+    }
+
+    &.step-2 {
+      &:after {
+        background: url('../img/wizard-bg-2.png') no-repeat top right;
+      }
+    }
+
+    &.step-3 {
+      &:after {
+        background: url('../img/wizard-bg-3.png') no-repeat center right;
+      }
+    }
+
+    &.step-4 {
+      &:after {
+        background: url('../img/wizard-bg-4.png') no-repeat center right;
+      }
+    }
+
+    &.step-7 {
+      &:after {
+        background: url('../img/wizard-bg-5.png') no-repeat top right;
+      }
+    }
+
+    &.step-8,
+    &.step-9,
+    &.step-10,
+    &.step-11 {
+      &:after {
+        background: url('../img/wizard-bg-6.png') no-repeat top right;
+      }
     }
   }
 }
@@ -225,58 +275,6 @@
   height: 100%;
   padding: 15px;
   overflow: auto;
-
-  &:after {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 100%;
-    right: 0;
-    bottom: 0;
-    content: '';
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  &.step-1 {
-    &:after {
-      background: url('../img/wizard-bg-1.png') no-repeat center right -68px;
-    }
-  }
-
-  &.step-2 {
-    &:after {
-      background: url('../img/wizard-bg-2.png') no-repeat top right;
-    }
-  }
-
-  &.step-3 {
-    &:after {
-      background: url('../img/wizard-bg-3.png') no-repeat center right;
-    }
-  }
-
-  &.step-4 {
-    &:after {
-      background: url('../img/wizard-bg-4.png') no-repeat center right;
-    }
-  }
-
-  &.step-7 {
-    &:after {
-      background: url('../img/wizard-bg-5.png') no-repeat center right -535px;
-    }
-  }
-
-  &.step-8,
-  &.step-9,
-  &.step-10,
-  &.step-11 {
-    &:after {
-      background: url('../img/wizard-bg-6.png') no-repeat top -130px right;
-    }
-  }
 
   .wizard-title {
     display: flex;
