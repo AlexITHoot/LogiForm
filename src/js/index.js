@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // if (checkDisplaySropdownContent) {
       dropdownContent.forEach(el => {
         el.classList.remove("show");
-        el.style.focus = 'none';
       })
       // }
       el.nextElementSibling.classList.toggle("show");
