@@ -12,7 +12,12 @@
 
 //Dropdown 
 const dropdownBtn = document.querySelectorAll('.dropdown-btn');
+const dropdownContent = document.querySelectorAll('.dropdown-content');
 const bbb = document.querySelector('.block-table');
+
+
+console.log(bbb, dropdownBtn);
+
 // console.log(bbb, bbb.offsetTop, bbb.offsetLeft);
 // console.log(dropdownBtn);
 
@@ -25,30 +30,62 @@ const bbb = document.querySelector('.block-table');
 // }
 
 
-const dropdownBtnAlone = document.querySelector('.dropdown-btn');
-console.log(dropdownBtnAlone, dropdownBtnAlone.offsetTop, dropdownBtnAlone.offsetLeft);
+// const dropdownBtnAlone = document.querySelector('.dropdown-btn');
+// console.log(dropdownBtnAlone, dropdownBtnAlone.offsetTop, dropdownBtnAlone.offsetLeft);
+const content = document.querySelector('.content');
+
 document.addEventListener("DOMContentLoaded", function () {
+
   dropdownBtn.forEach((el) => {
 
     el.addEventListener('click', () => {
-      console.log(el.getBoundingClientRect().top + window.scrollY);
-      console.log(el, el.offsetTop, el.offsetLeft);
+      let rect = el.getBoundingClientRect();
+      // let scrolling = content.scrollTop;
+      // console.log(scrolling);
+      //  + window.scrollY
+      console.log(rect, rect.top, rect.left);
 
-
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
+      // if (checkDisplaySropdownContent) {
+      dropdownContent.forEach(el => {
+        el.classList.remove("show");
+        el.style.focus = 'none';
+      })
+      // }
       el.nextElementSibling.classList.toggle("show");
+      el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight}px)`;
+      // if(dropdownContent)
+      // var dropdowns = document.getElementsByClassName("dropdown-content");
+      // var i;
+      // for (i = 0; i < dropdowns.length; i++) {
+      //   var openDropdown = dropdowns[i];
+      //   if (openDropdown.classList.contains('show')) {
+      //     openDropdown.classList.remove('show');
+      //     // el.nextElementSibling.style.transform = `translate(${rect.top}px ${rect.left}px)`
+      //   }
+      // }
+      // el.nextElementSibling.classList.toggle("show");
+
     })
 
   })
 });
 
+const checkDisplaySropdownContent = () => {
+  dropdownContent.forEach(e => {
+    console.log(e.classList.contains('show'))
+  })
+}
+
+content.addEventListener('scroll', () => {
+  if (content.scrollTop > 0) {
+    dropdownContent.forEach(el => {
+      el.classList.remove("show");
+    })
+    dropdownBtn.forEach(el => {
+      el.blur();
+    })
+  }
+})
 
 
 // Close the dropdown if the user clicks outside of it
