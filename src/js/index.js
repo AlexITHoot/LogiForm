@@ -32,6 +32,7 @@ console.log(bbb, dropdownBtn);
 
 // const dropdownBtnAlone = document.querySelector('.dropdown-btn');
 // console.log(dropdownBtnAlone, dropdownBtnAlone.offsetTop, dropdownBtnAlone.offsetLeft);
+
 const content = document.querySelector('.content');
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -52,6 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // }
       el.nextElementSibling.classList.toggle("show");
       el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight}px)`;
+      // content.addEventListener('scroll', () => {
+      //   el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight - content.scrollTop}px)`;
+      // })
       // if(dropdownContent)
       // var dropdowns = document.getElementsByClassName("dropdown-content");
       // var i;
@@ -76,6 +80,7 @@ const checkDisplaySropdownContent = () => {
 }
 
 content.addEventListener('scroll', () => {
+
   if (content.scrollTop > 0) {
     dropdownContent.forEach(el => {
       el.classList.remove("show");
@@ -195,6 +200,8 @@ window.onclick = function (event) {
 // });
 
 
+//Highlight active menu link
+
 const menuLinks = document.querySelectorAll('.menu-nav li');
 const path = location.pathname.split("/");
 menuLinks.forEach(el => {
@@ -207,23 +214,31 @@ menuLinks.forEach(el => {
 })
 
 
+//Mobile sidebar menu
+
 const body = document.querySelector('body');
 const menuBtn = document.querySelector('.menu-btn');
 const sidebar = document.querySelector('.sidebar');
 const closeBtn = document.querySelector('.sidebar-header .close')
 const overlay = document.querySelector('.overlay');
 
-overlay.addEventListener('click', () => {
-  toggleMenu(false);
-})
+if (overlay) {
+  overlay.addEventListener('click', () => {
+    toggleMenu(false);
+  })
+}
 
-closeBtn.addEventListener('click', () => {
-  toggleMenu(false);
-})
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    toggleMenu(false);
+  })
+}
 
-menuBtn.addEventListener('click', () => {
-  toggleMenu(true)
-})
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    toggleMenu(true)
+  })
+}
 
 const toggleMenu = (state) => {
   if (state) {
@@ -247,18 +262,3 @@ const checkWidth = () => {
 }
 
 window.addEventListener('resize', checkWidth)
-
-
-
-//Templates tabs list
-
-// const templateList = document.querySelectorAll('.template-nav-list ul li');
-
-// templateList.forEach(el => {
-//   el.addEventListener('click', () => {
-//     templateList.forEach(el => {
-//       el.classList.remove('active')
-//     })
-//     el.classList.add('active')
-//   })
-// })
