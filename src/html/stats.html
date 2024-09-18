@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logiform</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+  <main class="d-flex">
+    @@include('./blocks/sidebar.html')
+    @@include('./blocks/header.html')
+    <div class="content">
+      <div class="container d-flex align-items-start flex-wrap align-content-start gutter">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <div class="icon">
+                    <img src="./img/View-icon.svg" alt="">
+                  </div>
+                  <div>
+                    <p class="small">Vendor Issue Form</p>
+                    <span>Modified 7 days ago</span>
+                  </div>
+                </div>
+                <div class="card-toolbar">
+                  <button class="btn btn-tertiary">Continue</button>            
+                </div>
+              </div>
+            </div>              
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            @@include('./blocks/statistic.html')
+          </div>
+        </div>  
+        <div class="row d-flex row-gap">
+          <div class="col col-12 col-lg-6">
+            @@include('./blocks/most-active-form.html')
+          </div>
+          <div class="col col-12 col-lg-6">
+            @@include('./blocks/recently-submitted.html')
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="overlay"></div>    
+  </main>
+  <script src="./js/index.bundle.js"></script>
+</body>
+</html>

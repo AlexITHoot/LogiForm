@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       // }
       el.nextElementSibling.classList.toggle("show");
-      el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight}px)`;
+      el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight + 4}px)`;
       // content.addEventListener('scroll', () => {
       //   el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight - content.scrollTop}px)`;
       // })
