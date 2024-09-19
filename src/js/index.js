@@ -46,12 +46,17 @@ document.addEventListener("DOMContentLoaded", function () {
       //  + window.scrollY
       console.log(rect, rect.top, rect.left);
 
-      // if (checkDisplaySropdownContent) {
-      dropdownContent.forEach(el => {
-        el.classList.remove("show");
-      })
-      // }
-      el.nextElementSibling.classList.toggle("show");
+      if (el.nextElementSibling.classList.contains('show')) {
+        el.blur();
+        el.nextElementSibling.classList.toggle("show");
+      } else {
+        dropdownContent.forEach(el => {
+          el.classList.remove("show");
+        })
+        el.nextElementSibling.classList.toggle("show");
+      }
+
+
       el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight + 4}px)`;
       // content.addEventListener('scroll', () => {
       //   el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight - content.scrollTop}px)`;

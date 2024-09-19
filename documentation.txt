@@ -1,0 +1,20 @@
+#Markup
+1.Class 'container' - the main markup element that wraps the content of the site for correct display in the grid
+2.Class 'row' - parent element wrapper for element with class name 'col'
+3.Class 'col' - elements of the grid
+
+
+#Dashboard
+
+1. Element <main> - intended for the main content of the document
+2. An element with class name 'sidebar' contains navigation elements
+3. An element with class name 'content' contains main content
+
+#Wizard
+1.Class 'wizard-page'
+2.Class 'wizard'
+3.Class 'wizard-left-side'
+4.Class 'wizard-right-side'
+5.Class 'wizard-header'
+6.Class 'wizard-content'
+7.Class 'wizard-footer'
