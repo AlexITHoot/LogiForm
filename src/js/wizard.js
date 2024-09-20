@@ -124,9 +124,10 @@ const uploadBlock = document.querySelectorAll('.upload-block');
 uploadBlock.forEach(el => {
   const actualBtn = el.querySelector('.actual-btn');
   const fileChosen = el.querySelector('.file-chosen');
+  const fileChoosenText = el.querySelector('.file-chosen i');
   const btn = el.querySelector('.btn-upload');
   actualBtn.addEventListener('change', function () {
-    fileChosen.textContent = this.files[0].name,
+    fileChoosenText.textContent = this.files[0].name,
       fileChosen.insertAdjacentHTML('afterbegin', `
         <img src="./img/file.svg">
       `)
