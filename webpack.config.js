@@ -4,8 +4,6 @@ const config = {
     index: './src/js/index.js',
     page: './src/js/page.js',
     wizard: './src/js/wizard.js'
-    // contacts: './src/js/contacts.js',
-    // about: './src/js/about.js',
   },
   output: {
     filename: '[name].bundle.js',
