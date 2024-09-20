@@ -6,6 +6,7 @@ var sortable = Sortable.create(el);
 
 
 //Chart
+
 import ApexCharts from 'apexcharts'
 var options = {
   series: [100],
@@ -51,6 +52,8 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);
 
+
+//Template list tabs
 
 window.addEventListener('DOMContentLoaded', function () {
 
@@ -103,8 +106,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 //Radio checking
 const radioList = document.querySelectorAll('.form-radio-list');
-// const radioBtn = document.querySelectorAll('.form-radio');
-// const par = document.querySelectorAll('.form-radio-list li');
 
 radioList.forEach(listElement => {
   const radioBtn = listElement.querySelectorAll('.form-radio');
@@ -129,7 +130,6 @@ uploadBlock.forEach(el => {
       fileChosen.insertAdjacentHTML('afterbegin', `
         <img src="./img/file.svg">
       `)
-    // fileChosen.classList.add('uploaded')
     if (this.files.length > 0) {
       btn.textContent = 'Upload Another File'
     }
@@ -143,21 +143,12 @@ let stepIndex = 0;
 let activeStepIndex;
 activeStepIndex = 5;
 const wizard = document.querySelector('.wizard-page');
-// const steps = wizard.querySelectorAll('.wizard-step');
-// const steps = wizard.querySelectorAll('.wizard-content');
 
 //Common fields
 const commonFields = wizard.querySelectorAll('.wizard-left-side .common-fields li button');
 const commonFieldsDraggable = wizard.querySelector('#items');
 
 const commonFieldsDv = wizard.querySelector('.wizard-left-side [name="common-fields"]');
-//const commonFieldsSelect = wizard.querySelector('.wizard-left-side [name="common-fields"]');
-// commonFields.forEach((el) => {
-//   var opt = document.createElement('option');
-//   opt.value = el.dataset.clone;
-//   opt.innerHTML = el.innerHTML;
-//   commonFieldsSelect.appendChild(opt);
-// })
 
 const changeButtonText = () => {
   const b = commonFieldsDraggable.querySelectorAll('li button');
@@ -168,23 +159,8 @@ const changeButtonText = () => {
 
 commonFields.forEach(el => {
   el.addEventListener('click', () => {
-    //const clone = el.parentElement.cloneNode(true);
-    //const cloneBtn = clone.querySelector('.btn');
-    //cloneBtn.setAttribute('data-page', commonFieldsPage);
-    //cloneBtn.setAttribute('data-page-item', commonFieldsPageItem);
-    //commonFieldsDraggable.appendChild(clone);
 
-    //el.textContent = 'Added';
-    //el.disabled = true;
     changeButtonText();
-
-    // commonFieldsSelect.querySelectorAll('option').forEach((item) => {
-    //   if (item.value === el.dataset.clone) {
-    //     item.setAttribute('checked', 'checked');
-    //   }
-    // })
-
-    //commonFieldsSelect.dispatchEvent(new Event('change'));
 
     var inpt = document.createElement(`input`);
     inpt.setAttribute('name', `common-fields[${commonFieldsPage}][${commonFieldsPageItemValue}]`);
@@ -205,10 +181,8 @@ commonFields.forEach(el => {
 const updateCommonFieldsButtons = () => {
   commonFields.forEach((el) => {
 
-    console.log('commonFields', el)
     const inpt = commonFieldsDv.querySelector(`input[name^="common-fields[${commonFieldsPage}]["][value="${el.dataset.clone}"]`);
 
-    console.log('commonFields input', inpt)
     if (inpt) {
       el.disabled = true;
       el.textContent = 'Added'
@@ -219,16 +193,6 @@ const updateCommonFieldsButtons = () => {
 
     onChange();
   })
-
-  // commonFieldsDv.querySelectorAll('input').forEach((el) => {
-  //   //const inpt = commonFieldsDv.querySelector(`input[name="common-fields[${el.dataset.page}][${el.dataset.pageItem}]"]`)
-  //   const btn = commonFields.querySelector(`[data-clone="${el.value}"]`)
-  //   if (btn) {
-  //     el.disabled = true;
-  //   } else {
-  //     el.disabled = false;
-  //   }
-  // });
 
   displayedInformationBlock();
 }
@@ -279,18 +243,6 @@ commonFieldsDraggable.addEventListener('click', (e) => {
     })
     e.target.parentElement.remove();
     displayedInformationBlock();
-
-    // commonFieldsSelect.querySelectorAll('option').forEach((item) => {
-    //   if (item.value === e.target.dataset.clone) {
-    //     item.removeAttribute('checked');
-    //   }
-    // })
-
-    // commonFieldsSelect.dispatchEvent(new Event('change'));
-
-    //console.log('commonFieldsDv', e.target);
-    //console.log('commonFieldsDv', `input[name="common-fields[${e.target.dataset.page}][${e.target.dataset.pageItem}]"]`);
-
     commonFieldsDv.querySelector(`input[name="common-fields[${e.target.dataset.page}][${e.target.dataset.pageItem}]"]`).remove();
     renderCommonFieldsDraggable();
     updateCommonFieldsButtons();
@@ -332,13 +284,7 @@ const stepProgress = wizard.querySelector('.wizard-progress .step-progress');
 const numberOfSteps = wizard.querySelector('.number_of_steps');
 const progressBar = wizard.querySelector('.progress-bar');
 
-// stepProgress.innerHTML = 1;
 numberOfSteps.innerHTML = activeStepIndex;
-console.log('stepIndex', stepIndex);
-
-steps.forEach(el => {
-  console.log('step check value', el.dataset.nextStep);
-})
 
 const fillProgressBar = () => {
   progressBar.style.width = `${(100 / activeStepIndex) * (stepIndex + 1)}%`
@@ -359,7 +305,6 @@ const multiSelectNotEmpty = (el) => {
 
 const anyNotEmpty = (el) => {
   const items = el.querySelectorAll('[data-rule]');
-  console.log('anyNotEmpty', el)
 
   for (let index = 0; index < items.length; index++) {
     const r = notEmpty(items[index]);
@@ -608,9 +553,6 @@ const nextStepBtnText = () => {
   if (stepIndex == activeSteps.length - 1 && activeSteps.length > 3) {
     nextStepBtn.innerHTML = 'Finish';
   }
-  // else if (stepIndex == activeSteps.length - 1 && activeSteps.getAttribute('data-step') == 6) {
-  //   nextStepBtn.innerHTML = 'Generate';
-  // } 
   else {
     nextStepBtn.innerHTML = 'Next';
   }
@@ -620,21 +562,6 @@ const nextStepBtnText = () => {
 nextStepBtn.addEventListener('click', () => {
 
   if (stepIndex < activeSteps.length - 1) {
-    // const currentStep = steps[stepIndex];
-
-    // const nextStepParamsRaw = currentStep.getAttribute('data-next-step');
-    // const nextStepParams = JSON.parse(nextStepParamsRaw);
-
-    // let nextStepIndex;
-    // if (nextStepParams.element) {
-
-    //   const elementValue = currentStep.querySelector(`[name="${nextStepParams.element}"]:checked`).value;
-    //   nextStepIndex = nextStepParams.stepIndex[elementValue];
-    // } else {
-    //   nextStepIndex = nextStepParams.stepIndex;
-    // }
-
-
     activeSteps[stepIndex].classList.remove("show");
     activeSteps[stepIndex + 1].classList.add("show");
     stepIndex++;
@@ -673,7 +600,6 @@ const wizardRightSideStepContent = wizard.querySelectorAll('.wizard-right-side .
 
 
 const displayWizardRightSide = () => {
-  console.log('active steps', activeSteps);
   wizardRightSideStepContent.forEach(el => {
     el.style.display = 'none';
     if (activeSteps[stepIndex].dataset.step == 1) {
@@ -748,7 +674,6 @@ textareaField.forEach(el => {
   el.addEventListener('input', () => {
     if (el.value) {
       el.parentElement.querySelector('button').disabled = false;
-      console.log(el.value);
     } else {
       el.parentElement.querySelector('button').disabled = true;
     }
@@ -783,281 +708,6 @@ const showContentAfterGetResponse = () => {
     }
   })
 }
-
-// const dataFormType = wizard.querySelectorAll('[data-form-type]');
-// const formRadioBtns = wizard.querySelectorAll('[data-form-choose] input[data-rule][type="radio"]');
-
-// formRadioBtns.forEach(el => {
-//   el.addEventListener('click', () => {
-//     displayDataForm(el.value);
-//   })
-// })
-
-// dataFormType.forEach((el) => {
-//   el.style.display = 'none'
-// })
-// const displayDataForm = (type) => {
-//   dataFormType.forEach((el) => {
-//     if (el.dataset.formType == type) {
-//       el.style.display = 'block'
-//     } else {
-//       el.style.display = 'none';
-//     }
-//   })
-// }
-
-
-
-
-// const standardFormValidation = () => {
-//   const radioForm = wizard.querySelectorAll('input[type="radio"]');
-//   radioForm.forEach(el => {
-//     el.addEventListener('click', () => {
-//       if (el.value == 'useTemplate') {
-//         chooseTypeForm.classList.remove('active');
-//         chooseTypeForm.querySelector('[data-rule]').disabled = true;
-
-//         selectedTemplate.classList.add('active');
-//         //selectedTemplate.querySelector('[data-rule]').disabled = false;
-//       } else if (el.value == 'blackCanvas') {
-//         selectedTemplate.classList.remove('active');
-//         //selectedTemplate.querySelector('[data-rule]').disabled = true;
-
-//         chooseTypeForm.classList.add('active');
-//         chooseTypeForm.querySelector('[data-rule]').disabled = false;
-//       }
-//     })
-//   })
-// }
-
-// standardFormValidation();
-
-// const validateForm = (step) => {
-//   switch (step) {
-//     case '0':
-//       const field = wizard.querySelector('input[data-rule="notEmpty"]');
-//       const select = wizard.querySelector('select[data-rule="notEmpty"]')
-//       field.addEventListener('input', () => {
-
-//         if (field.value && select.value) {
-//           nextStepBtn[stepIndex].removeAttribute('disabled', '')
-//           return true;
-//         } else {
-//           nextStepBtn[stepIndex].setAttribute('disabled', '');
-//           return false;
-//         }
-//       })
-//       break;
-//     case '1':
-//       const radioForm = wizard.querySelectorAll('input[data-rule="checkItem"]');
-
-//       radioForm.forEach((el) => {
-//         el.addEventListener('click', () => {
-//           if (el.checked) {
-//             nextStepBtn[stepIndex].removeAttribute('disabled', '')
-//             return true;
-//           } else {
-//             nextStepBtn[stepIndex].setAttribute('disabled', '');
-//             return false;
-//           }
-//         })
-//       })
-//       // if(radioBtn:checked)
-//       break;
-//     default:
-//   };
-
-// }
-
-
-// steps[stepIndex].classList.add('show');
-// nextStepBtn.setAttribute('disabled', '');
-// nextStepBtn.disabled = true
-
-
-//1111111111111111111111111111111111111
-
-// const creationFormValidation = () => {
-
-//   const field = wizard.querySelector('input[data-rule="notEmpty"]');
-//   const select = wizard.querySelector('select[data-rule="notEmpty"]');
-
-//   if (field.value && select.value) {
-//     nextStepBtn.disabled = false;
-//   }
-//   field.addEventListener('input', () => {
-//     if (field.value && select.value) {
-//       nextStepBtn.disabled = false;
-//     } else {
-//       nextStepBtn.disabled = true;
-//     }
-//   })
-// }
-
-// const typeFormValidation = () => {
-
-//   const radioForm = wizard.querySelectorAll('input[data-rule="checkItem"]');
-//   if (stepIndex == 2) {
-//     nextStepBtn.disabled = true;
-//   }
-//   radioForm.forEach((el) => {
-
-//     if (el.checked && stepIndex == 2) {
-//       nextStepBtn.disabled = false;
-//     }
-//     el.addEventListener('click', () => {
-
-//       if (el.checked) {
-//         nextStepBtn.disabled = false;
-
-//       } else {
-//         nextStepBtn.disabled = true;
-//       }
-//     })
-//   })
-// }
-
-// const standardFormValidation = () => {
-//   const radioForm = wizard.querySelectorAll('input[data-rule="checkItem"]');
-//   if (stepIndex == 3) {
-//     nextStepBtn.disabled = true;
-//   }
-//   radioForm.forEach(el => {
-
-//     console.log('Elll', el);
-
-//     if (el.checked && stepIndex == 3) {
-//       console.log('3 step');
-
-//       nextStepBtn.disabled = false;
-//     }
-//     el.addEventListener('click', () => {
-//       if (el.checked) {
-//         nextStepBtn.disabled = false;
-
-//       } else {
-//         nextStepBtn.disabled = true;
-//       }
-//       if (el.value == 'useTemplate') {
-//         chooseTypeForm.classList.remove('active');
-//         selectedTemplate.classList.add('active');
-//       } else if (el.value == 'blackCanvas') {
-//         selectedTemplate.classList.remove('active');
-//         chooseTypeForm.classList.add('active');
-//       }
-//     })
-
-//   })
-// }
-
-
-// const prevStepBtnText = () => {
-//   if (stepIndex >= 2) {
-//     prevStepBtn.innerHTML = 'Previous';
-//   } else {
-//     prevStepBtn.innerHTML = 'Cancel';
-//   }
-// }
-
-// wizard.addEventListener("click", (e) => {
-
-//   let activeIndex = Array.from(steps).findIndex(step => step.classList.contains("show"));
-
-//   if (e.target.matches(".next-step")) {
-//     if (activeIndex < steps.length - 1) {
-//       steps[activeIndex].classList.remove("show");
-//       steps[activeIndex + 1].classList.add("show");
-//       stepIndex++;
-//       stepProgress.innerHTML = stepIndex;
-//       prevStepBtnText();
-//       fillProgressBar();
-//     }
-//   } else if (e.target.matches(".prev-step")) {
-//     if (activeIndex > 0) {
-//       steps[activeIndex].classList.remove("show");
-//       steps[activeIndex - 1].classList.add("show");
-//       stepIndex--;
-//       stepProgress.innerHTML = stepIndex;
-//       prevStepBtnText();
-//       fillProgressBar();
-//     }
-//   }
-
-//   creationFormValidation();
-//   typeFormValidation();
-//   standardFormValidation();
-//   console.log(stepIndex);
-// });
-
-//1111111111111111111111111111111111111111111111111
-
-// if (activeIndex == 0) {
-//   creationFormValidation()
-// } else if (activeIndex == 1) {
-//   typeFormValidation()
-// }
-
-// steps.forEach((el, index) => {
-//   nextStepBtn[index].setAttribute('disabled', '');
-//   validateForm(String(index))
-//   el.querySelector('.next-step').addEventListener('click', () => {
-//     if (stepIndex < steps.length - 1) {
-//       stepIndex++;
-
-//       steps.forEach(el => {
-//         el.classList.remove('show')
-//       })
-//       steps[stepIndex].classList.add('show');
-//     }
-
-
-//   })
-//   el.querySelector('.prev-step').addEventListener('click', () => {
-//     if (stepIndex > 0) {
-//       stepIndex--;
-
-//       steps.forEach(el => {
-//         el.classList.remove('show')
-//       })
-//       steps[stepIndex].classList.add('show');
-//     }
-
-//   })
-// })
-
-//------------------------------------------------
-
-// const fields = wizard.querySelectorAll('[data-rule]');
-
-// fields.forEach((el) => {
-//   el.addEventListener('input', () => {
-//     validateStep();
-//   })
-// })
-
-// fields.forEach((el) => {
-//   el.addEventListener('change', () => {
-//     validateStep();
-//   })
-// })
-
-// const notEmpty = (value) => {
-//   return value != null && value != '';
-// }
-
-// const validateStep = () => {
-
-//   steps[stepIndex].querySelectorAll('[data-rule]').forEach((el) => {
-//     const atributeName = el.getAttribute('data-rule');
-//     console.log(el.value);
-//     console.log(atributeName(el.value));
-
-//     console.log('Name', eval(atributeName + `(${el.value})`));
-//     eval(atributeName + `(${el.value})`)
-//   })
-
-// }
-
 
 //------------------------------------------------------
 

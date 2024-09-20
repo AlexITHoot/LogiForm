@@ -2,6 +2,7 @@
 1.Class 'container' - the main markup element that wraps the content of the site for correct display in the grid
 2.Class 'row' - parent element wrapper for element with class name 'col'
 3.Class 'col' - elements of the grid
+4.Class 'card' - A card is a flexible and extensible content container. Cards are built with as little markup and styles as possible
 
 
 #Dashboard
@@ -9,12 +10,36 @@
 1. Element <main> - intended for the main content of the document
 2. An element with class name 'sidebar' contains navigation elements
 3. An element with class name 'content' contains main content
+4.Element <header> - Displayed at a resolution of less than 998px.
+5.Class 'overlay' - Translucent dark background
+
 
 #Wizard
-1.Class 'wizard-page'
-2.Class 'wizard'
-3.Class 'wizard-left-side'
-4.Class 'wizard-right-side'
-5.Class 'wizard-header'
-6.Class 'wizard-content'
-7.Class 'wizard-footer'
+
+1.Class 'wizard-page'- Wrapper for wizard
+2.Class 'wizard' - Form for wizard
+3.Class 'wizard-left-side' - Left wizard side
+4.Class 'wizard-right-side' - Right wizard side
+5.Class 'wizard-header' - Higher part of wizard
+6.Class 'wizard-content' - Main part of wizard changes step by step
+7.Class 'wizard-footer' - Lower part of wizard
+8.Class 'template-page' - There are template forms on the page
+9.Class 'wizard-step-content' - Includes content for the selected step
+10.Class 'modal-wrapper' - Contains pop-up window 
+
+
+
+#Folder structure
+
+-For developing 
+
+scr - Source code for developing
+src/html - Html files
+src/scss - SASS/SCSS style files
+src/js - JS files 
+src/img - Images
+build - All content to develop
+
+-For deploying
+
+docs - All content to deploy (minimized);

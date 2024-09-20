@@ -11,8 +11,7 @@
 </head>
 <body>
   <main class="d-flex wizard-page">
-    <div name="myForm"  class="wizard">
-
+    <form onsubmit="return false;" name="myForm"  class="wizard">
         <div class="row no-gutter d-flex h-100">
           <div class="col-6 flex-column h-100" style="z-index:1;">
             <div class="wizard-left-side bg-white box-shadow border-right">
@@ -30,7 +29,7 @@
                   </div>
                 </div>
               </div>
-              <div class="wizard-content step-1 show active-step" data-step="1" data-next-step='{ "element": null, "stepIndex": 1 }'>
+              <div class="wizard-content step-1 show active-step" data-step="1">
                 <div class="wizard-title">
                   <div class="wizard-inner-title">
                     <p>General settings</p>
@@ -58,7 +57,7 @@
                   </div>
                 </div>
               </div>
-              <div class="wizard-content step-2 active-step" data-step="2" data-next-step='{ "element": "general", "stepIndex": { "standartForm": 2, "aiForm": 5, "htmlForm": 3, "pdfForm": 3 } }'>
+              <div class="wizard-content step-2 active-step" data-step="2">
                 <div class="wizard-title">
                   <div class="wizard-inner-title">
                     <p>What type of form do you want to create</p>
@@ -144,7 +143,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="wizard-content step-3" data-step="3" data-next-step='{ "element": "create-form", "stepIndex": { "useTemplate": 3, "blackCanvas": 3 } }'>
+              <div class="wizard-content step-3" data-step="3">
                   <div class="wizard-title">
                     <div class="wizard-inner-title">
                       <p>What type of form do you want to create</p>
@@ -256,7 +255,7 @@
                   </div>                                    
                   </div>                  
               </div>
-              <div class="wizard-content step-4" data-step="4" data-next-step="{ }">
+              <div class="wizard-content step-4" data-step="4">
                 <div class="wizard-title">
                   <div class="wizard-inner-title">
                     <p>What type of form do you want to create</p>
@@ -1195,7 +1194,7 @@
             </div>
           </div>
         </div>      
-    </div>
+    </form>
   </main>
   <div class="modal-wrapper">
     <div class="modal">
@@ -1239,31 +1238,7 @@
             }
         },
         "plugins": ["types"]
-    });   
-
-    // handle link clicks in tree nodes(support target="_blank" as well)
-    // $('#kt_tree_2').on('select_node.jstree', function(e, data) {
-    //     var link = $('#' + data.selected).find('a');
-    //     if (link.attr("href") != "#" && link.attr("href") != "javascript:;" && link.attr("href") != "") {
-    //         if (link.attr("target") == "_blank") {
-    //             link.attr("href").target = "_blank";
-    //         }
-    //         document.location.href = link.attr("href");
-    //         return false;
-    //     }
-    // });
-    // const c = document.getElementById('createNewFolder');
-    // c.addEventListener('click',()=>{
-    //   var position = 'inside';
-    //   var parent = $('#kt_tree_2').jstree('get_selected');
-    //   var node = { id:123,text:"Hello world"};
-    //   $('#kt_tree_2').jstree('create_node', parent, node, 'last');   
-    // })
-      // var position = 'inside';
-      // var parent = $('#kt_tree_2').jstree('get_selected');
-      // var node = { id:123,text:"Hello world"};
-      // $('#kt_tree_2').jstree("create_node", parent, newNode, position, false, false);       
+    });       
   </script>
- 
 </body>
 </html>

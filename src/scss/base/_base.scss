@@ -14,7 +14,6 @@ body {
 
 main {
 	height: 100vh;
-
 }
 
 picture {
@@ -23,15 +22,15 @@ picture {
 
 .container {
 	width: 100%;
-	padding: 0 15px;
+	padding: 0 var(--gutter);
 }
 
 .content {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: var(--gutter);
+	padding-bottom: var(--gutter);
 	height: 100vh;
 	overflow: auto;
 }
@@ -39,16 +38,15 @@ picture {
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	// gap: 15px;
 	flex: 1 1 100%;
-	margin-left: -7.5px;
-	margin-right: -7.5px;
+	margin-left: calc(-1 * var(--gutter)/2);
+	margin-right: calc(-1 * var(--gutter)/2);
 }
 
 .col {
 	display: flex;
 	flex: 1 0 0%;
-	padding: 0 7.5px;
+	padding: 0 calc(var(--gutter)/2);
 }
 
 .col-auto {
@@ -80,15 +78,19 @@ picture {
 }
 
 .column-gap {
-	column-gap: 15px;
+	column-gap: var(--gutter);
 }
 
 .row-gap {
-	row-gap: 15px;
+	row-gap: var(--gutter);
 }
 
 .flex-wrap {
 	flex-wrap: wrap;
+}
+
+.no-wrap {
+	flex-wrap: nowrap;
 }
 
 .d-none {
