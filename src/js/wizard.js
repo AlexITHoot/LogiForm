@@ -552,6 +552,11 @@ const prevStepBtnText = () => {
 const nextStepBtnText = () => {
   if (stepIndex == activeSteps.length - 1 && activeSteps.length > 3) {
     nextStepBtn.innerHTML = 'Finish';
+  } else if (stepIndex == activeSteps.length - 1 && activeSteps.length > 2 && radioBtns[1].checked) {
+    nextStepBtn.innerHTML = 'Generate form';
+
+  } else if (stepIndex == 1 && radioBtns[1].checked) {
+    nextStepBtn.innerHTML = 'Generate';
   } else {
     nextStepBtn.innerHTML = 'Next';
   }
@@ -561,7 +566,6 @@ const nextStepBtnText = () => {
 
 
 nextStepBtn.addEventListener('click', () => {
-  console.log('RB', radioBtns[stepIndex], activeSteps[stepIndex].dataset.step);
   if (stepIndex < activeSteps.length - 1) {
     activeSteps[stepIndex].classList.remove("show");
     activeSteps[stepIndex + 1].classList.add("show");
@@ -641,8 +645,6 @@ const displayWizardRightSide = () => {
 }
 
 displayWizardRightSide();
-
-// window.addEventListener('resize', displayWizardRightSide)
 
 const handleTemplatePage = () => {
   if (templatePage.classList.contains('hide')) {
