@@ -125,14 +125,13 @@ uploadBlock.forEach(el => {
   const actualBtn = el.querySelector('.actual-btn');
   const fileChosen = el.querySelector('.file-chosen');
   const fileChoosenText = el.querySelector('.file-chosen i');
+  const fileChoosenImg = el.querySelector('.file-chosen img');
   const btn = el.querySelector('.btn-upload');
   actualBtn.addEventListener('change', function () {
-    fileChoosenText.textContent = this.files[0].name,
-      fileChosen.insertAdjacentHTML('afterbegin', `
-        <img src="./img/file.svg">
-      `)
+    fileChoosenText.textContent = this.files[0].name;
     if (this.files.length > 0) {
-      btn.textContent = 'Upload Another File'
+      btn.textContent = 'Upload Another File';
+      fileChoosenImg.style.display = 'block'
     }
   })
 })
@@ -553,15 +552,16 @@ const prevStepBtnText = () => {
 const nextStepBtnText = () => {
   if (stepIndex == activeSteps.length - 1 && activeSteps.length > 3) {
     nextStepBtn.innerHTML = 'Finish';
-  }
-  else {
+  } else {
     nextStepBtn.innerHTML = 'Next';
   }
 }
 
 
-nextStepBtn.addEventListener('click', () => {
 
+
+nextStepBtn.addEventListener('click', () => {
+  console.log('RB', radioBtns[stepIndex], activeSteps[stepIndex].dataset.step);
   if (stepIndex < activeSteps.length - 1) {
     activeSteps[stepIndex].classList.remove("show");
     activeSteps[stepIndex + 1].classList.add("show");
@@ -598,32 +598,38 @@ const closeTemplate = wizard.querySelector('.template-page .cancel');
 const useTemplate = templatePage.querySelectorAll('.use-template');
 const wizardRightSide = wizard.querySelector('.wizard-right-side');
 const wizardRightSideStepContent = wizard.querySelectorAll('.wizard-right-side .wizard-step-content');
+const colRight = wizard.querySelector('.col-right');
 
 
 const displayWizardRightSide = () => {
+  colRight.style.display = 'none';
   wizardRightSideStepContent.forEach(el => {
     el.style.display = 'none';
     if (activeSteps[stepIndex].dataset.step == 1) {
       wizardRightSide.classList.remove('hide')
       if (el.dataset.stepPage == 1) {
         el.style.display = 'flex';
+        colRight.style.display = 'block';
       }
     } else if (activeSteps[stepIndex].dataset.step == 2) {
       wizardRightSide.classList.remove('hide')
       if (el.dataset.stepPage == 2) {
 
         el.style.display = 'flex';
+        colRight.style.display = 'block';
       }
     } else if (activeSteps[stepIndex].dataset.step == 5) {
       wizardRightSide.classList.remove('hide')
       if (el.dataset.stepPage == 5) {
 
         el.style.display = 'flex';
+        colRight.style.display = 'block';
       }
     } else if (activeSteps[stepIndex].dataset.step == 6) {
       wizardRightSide.classList.remove('hide')
       if (el.dataset.stepPage == 6) {
         el.style.display = 'flex';
+        colRight.style.display = 'block';
       }
     } else if (activeSteps[stepIndex].dataset.step == 7) {
 
@@ -635,6 +641,8 @@ const displayWizardRightSide = () => {
 }
 
 displayWizardRightSide();
+
+// window.addEventListener('resize', displayWizardRightSide)
 
 const handleTemplatePage = () => {
   if (templatePage.classList.contains('hide')) {

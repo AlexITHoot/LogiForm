@@ -1,11 +1,25 @@
+  .upload-block {
+    gap: 10px;
+  }
+
   .file-chosen {
     display: flex;
     align-items: center;
     gap: 4px;
 
+    img {
+      display: none;
+    }
+
     i {
       font-style: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
       overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      /* Number of lines */
+      -webkit-box-orient: vertical;
     }
   }
 

@@ -3,21 +3,34 @@ table {
   min-width: 650px;
 
   tr {
+    position: relative;
+
     th {
       text-align: start;
       font-size: 12px;
       font-weight: 400;
       color: var(--grey);
-      padding: 5px 0;
+      padding: 5px 10px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        text-align: right;
+        padding-right: 0;
+      }
     }
 
     td {
       padding: 15px 10px;
 
+
       .block-info {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 10px;
+        color: var(--main-black);
 
         &.circle {
           .icon {
@@ -39,43 +52,54 @@ table {
           }
         }
 
-        .info-title {
+        &-wrapper {
           position: relative;
-
-          .badge-list {
-            position: absolute;
-            top: -20px;
-            left: 0;
-            display: none;
-            align-items: center;
-            gap: 4px;
-            transition: 0.2s;
-
-            .badge {
-              display: flex;
-              flex-shrink: 0;
-              padding: 3px 10px;
-              border-radius: var(--border-radius);
-              background: var(--blue-sky);
-              font-size: 12px;
-              font-weight: 500;
-              color: var(--blue);
-            }
-          }
+          display: inline-flex;
+          flex-direction: column;
+          gap: 5px;
         }
 
-        p {
+        &-title {
           font-size: 15px;
+          line-height: 1;
           font-weight: 500;
         }
 
-        span {
+        &-id {
           position: relative;
           font-size: 12px;
           font-weight: 400;
           color: var(--grey);
+        }
+      }
 
+      .badge-list {
+        position: absolute;
+        top: 0;
+        left: 86px;
+        width: calc(100% - 86px);
+        display: none;
+        align-items: center;
+        gap: 4px;
+        transition: 0.2s;
+        z-index: 1;
 
+        .badge {
+          display: flex;
+          flex-shrink: 0;
+          padding: 3px 10px;
+          border-radius: var(--border-radius);
+          background: var(--blue-sky);
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--blue);
+          cursor: pointer;
+          transition: 0.2s;
+
+          &:hover {
+            background: var(--blue);
+            color: var(--main-white);
+          }
         }
       }
 
@@ -95,12 +119,8 @@ table {
 
     &:hover {
       td {
-        .block-info {
-          .info-title {
-            .badge-list {
-              display: flex;
-            }
-          }
+        .badge-list {
+          display: flex;
         }
       }
     }

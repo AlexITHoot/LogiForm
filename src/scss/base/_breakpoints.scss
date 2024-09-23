@@ -1,10 +1,15 @@
 //MAX-WIDTH TO LESS
 
 // X-Small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {}
+@media (max-width: 575.98px) {
+  .block-table {
+    .card-toolbar {
+      select {
+        width: 100%;
+      }
+    }
+  }
 
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {
   .tab-table {
     .tab-table-row {
       .tab-table-col {
@@ -13,12 +18,59 @@
     }
   }
 
+  table {
+    tr {
+      td {
+        .badge-list {
+          .badge {
+            padding: 3px 5px;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+
+
   .block-tools {
     .btn {
       font-size: 0;
       gap: 0;
       flex-shrink: 0;
     }
+
+    .col-tools-img {
+      flex: 0 0 100%;
+      justify-content: center;
+    }
+
+    .col-tools-tabs {
+      flex: 0 0 100%;
+    }
+  }
+
+  table {
+    tr:hover {
+      td {
+        .badge-list {
+          flex-wrap: wrap;
+          width: calc(100vw - 146px);
+        }
+      }
+    }
+  }
+
+  .col-left {
+    flex: 1 1 100%;
+  }
+
+  .col-right {
+    flex: 1 1 100%;
+    display: none;
   }
 }
 
@@ -52,20 +104,6 @@
     }
   }
 
-  table {
-    tr:hover {
-      td {
-        .block-info {
-          .info-title {
-            .badge-list {
-              flex-wrap: wrap;
-              width: calc(100vw - 176px);
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 // Large devices (desktops, less than 1200px)
