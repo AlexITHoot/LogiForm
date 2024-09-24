@@ -163,10 +163,10 @@ commonFields.forEach(el => {
     changeButtonText();
 
     var inpt = document.createElement(`input`);
-    inpt.setAttribute('name', `common-fields[${commonFieldsPage}][${commonFieldsPageItemValue}]`);
+    inpt.setAttribute('name', `common-fields[${commonFieldsPageCurrent}][${commonFieldsPageItemValue}]`);
     inpt.setAttribute('type', 'hidden');
     inpt.setAttribute('data-rule', '');
-    inpt.setAttribute('data-page', commonFieldsPage);
+    inpt.setAttribute('data-page', commonFieldsPageCurrent);
     inpt.setAttribute('data-page-item', commonFieldsPageItemValue);
     const elName = el.parentElement.querySelector('.field-title span').textContent;
     inpt.setAttribute('data-name', elName);
@@ -181,7 +181,7 @@ commonFields.forEach(el => {
 const updateCommonFieldsButtons = () => {
   commonFields.forEach((el) => {
 
-    const inpt = commonFieldsDv.querySelector(`input[name^="common-fields[${commonFieldsPage}]["][value="${el.dataset.clone}"]`);
+    const inpt = commonFieldsDv.querySelector(`input[name^="common-fields[${commonFieldsPageCurrent}]["][value="${el.dataset.clone}"]`);
 
     if (inpt) {
       el.disabled = true;
@@ -200,11 +200,14 @@ const updateCommonFieldsButtons = () => {
 const renderCommonFieldsDraggable = () => {
   commonFieldsDraggable.innerHTML = ''
   commonFieldsDv.querySelectorAll('input').forEach((el) => {
-    const name = el.dataset.name;
-    const page = el.dataset.page;
-    const pageItem = el.dataset.pageItem;
-    const template = commonFieldsItemTemplate(name, page, pageItem)
-    commonFieldsDraggable?.appendChild(template.content.firstChild);
+    //if (commonFieldsPageCurrent === Number(el.dataset.page))
+    {
+      const name = el.dataset.name;
+      const page = el.dataset.page;
+      const pageItem = el.dataset.pageItem;
+      const template = commonFieldsItemTemplate(name, page, pageItem)
+      commonFieldsDraggable?.appendChild(template.content.firstChild);
+    }
   });
 
   displayedInformationBlock();
@@ -229,7 +232,7 @@ const commonFieldsItemTemplate = (name, page, pageItem) => {
   return template;
 };
 
-let commonFieldsPage = 0;
+let commonFieldsPageCurrent = 0;
 let commonFieldsPageItemValue = '';
 
 commonFieldsDraggable.addEventListener('click', (e) => {
@@ -390,6 +393,12 @@ selects.forEach(el => {
 $('#kt_tree_2').on('select_node.jstree', onChange);
 
 const radioBtns = wizard.querySelectorAll('input[data-rule][type="radio"]');
+const deletePageBtn = document.querySelector('#deletePage');
+const addPageBtn = document.querySelector('#addPage');
+const wizzardFooter = document.querySelector('.wizard .wizard-right-side .wizard-footer');
+const pageGroup = document.querySelector('.wizard .wizard-right-side .wizard-footer .page-group')
+
+let singlePage = false;
 
 radioBtns.forEach(el => {
   el.addEventListener('change', onChange);
@@ -519,6 +528,20 @@ radioBtns.forEach(el => {
       chooseTypeForm.querySelector('[data-rule]').disabled = false;
     }
 
+    if (el.value == 'singlePage') {
+      singlePage = true;
+      if (singlePage) {
+        deletePageBtn.style.display = 'none';
+        addPageBtn.style.display = 'none';
+        wizzardFooter.style.display = 'none';
+      }
+    } else if (el.value == 'multiPage') {
+      singlePage = false;
+      deletePageBtn.style.display = 'flex';
+      addPageBtn.style.display = 'flex';
+      wizzardFooter.style.display = 'flex';
+    }
+
     if (el.value == 'hdLocal') {
       importFromUrl.classList.remove('active');
       importFromUrl.querySelector('[data-rule]').disabled = true;
@@ -534,6 +557,60 @@ radioBtns.forEach(el => {
 
   onChange();
 });
+
+addPageBtn.addEventListener('click', () => {
+  commonFieldsPageCurrent = pages.length + 1;
+  pages.push(commonFieldsPageCurrent);
+  renderPages();
+})
+
+deletePageBtn.addEventListener('click', () => {
+  if (pages.length < 2) {
+    return;
+  }
+
+  if (pages.length === commonFieldsPageCurrent) {
+    commonFieldsPageCurrent = commonFieldsPageCurrent - 1;
+  }
+
+  pages.pop();
+  renderPages();
+})
+
+const pages = [1];
+
+const renderPages = () => {
+  pageGroup.innerHTML = '';
+  console.log('pages', pages);
+
+  pages.forEach((pageNumber) => {
+    const pageBtn = document.createElement(`button`);
+    let classList = ['btn', 'btn-secondary', 'autowidth'];
+
+    if (commonFieldsPageCurrent === pageNumber) {
+      classList.push('active');
+    }
+
+    let prefix = '';
+    if (pageNumber === 1) {
+      prefix = 'Page ';
+    }
+
+    pageBtn.setAttribute('data-number', pageNumber);
+    pageBtn.classList.add(...classList);
+    pageBtn.innerHTML = `${prefix}${pageNumber}`
+    pageGroup.appendChild(pageBtn);
+  })
+
+  renderCommonFieldsDraggable();
+}
+
+pageGroup.addEventListener('click', (e) => {
+  if (e.target.tagName === 'BUTTON') {
+    commonFieldsPageCurrent = Number(e.target.dataset.number);
+    renderPages();
+  };
+})
 
 selectedTemplate.querySelector('[data-rule]').disabled = true;
 chooseTypeForm.querySelector('[data-rule]').disabled = true;
@@ -577,6 +654,7 @@ nextStepBtn.addEventListener('click', () => {
     displayWizardRightSide();
     onChange();
     numberOfSteps.innerHTML = activeStepIndex;
+
   }
 
 })

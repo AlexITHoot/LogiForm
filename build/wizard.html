@@ -868,10 +868,11 @@
           <div class="col-6 flex-column h-100 col-right">
             <div class="wizard-right-side hide">
               <div class="wizard-step-content bg-white h-100" data-step-page="5">
-                <div class="wizard-header step-1">
+                <div class="wizard-header">
                   <div class="wizard-header-title">
                     <p>Project Name Template</p>
-                  </div>              
+                  </div> 
+                  <button class="btn btn-secondary" id="deletePage">Delete Page</button>             
                 </div>
                 <div class="wizard-content">
                   <div class="information-block ">
@@ -888,8 +889,10 @@
                   </div>
                 </div>
                 <div class="wizard-footer d-flex justify-content-between">
-                  <button class="btn btn-secondary autowidth">Page 1</button>
-                  <button class="btn btn-secondary">Add page</button>              
+                  <div class="page-group">
+                    <button class="btn btn-secondary autowidth">Page 1</button>
+                  </div>
+                  <button class="btn btn-secondary" id="addPage">Add page</button>              
                 </div>                                 
               </div>
               <div class="wizard-step-content " data-step-page="6">

@@ -613,16 +613,30 @@
 }
 
 .wizard-footer {
-  height: 70px;
+  min-height: 70px;
   margin-top: auto;
   padding: 15px;
   border-top: 1px solid var(--border-color);
   flex-shrink: 0;
   gap: 15px;
+  align-items: center;
 
   .btn {
     width: 100%;
     max-width: 186px;
+    white-space: nowrap;
+
+    &.active {
+      background: var(--blue);
+      color: var(--main-white);
+    }
+  }
+
+  .page-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 }
 
