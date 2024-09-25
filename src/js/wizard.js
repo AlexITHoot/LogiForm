@@ -157,20 +157,25 @@ const changeButtonText = () => {
   })
 }
 
+let commonFieldsPageCurrent = 1;
+
 commonFields.forEach(el => {
   el.addEventListener('click', () => {
-
     changeButtonText();
 
-    var inpt = document.createElement(`input`);
-    inpt.setAttribute('name', `common-fields[${commonFieldsPageCurrent}][${commonFieldsPageItemValue}]`);
+    const tag = el.dataset.clone;
+    const iconSrc = el.parentElement.querySelector('.field-title .icon img').src;
+
+    const inpt = document.createElement(`input`);
+    inpt.setAttribute('data-icon-src', iconSrc)
+    inpt.setAttribute('name', `common-fields[${commonFieldsPageCurrent}][${tag}]`);
     inpt.setAttribute('type', 'hidden');
     inpt.setAttribute('data-rule', '');
     inpt.setAttribute('data-page', commonFieldsPageCurrent);
-    inpt.setAttribute('data-page-item', commonFieldsPageItemValue);
+    inpt.setAttribute('data-page-item', tag);
     const elName = el.parentElement.querySelector('.field-title span').textContent;
     inpt.setAttribute('data-name', elName);
-    inpt.value = el.dataset.clone;
+    inpt.value = tag;
     commonFieldsDv?.appendChild(inpt);
 
     renderCommonFieldsDraggable();
@@ -180,9 +185,7 @@ commonFields.forEach(el => {
 
 const updateCommonFieldsButtons = () => {
   commonFields.forEach((el) => {
-
-    const inpt = commonFieldsDv.querySelector(`input[name^="common-fields[${commonFieldsPageCurrent}]["][value="${el.dataset.clone}"]`);
-
+    const inpt = commonFieldsDv.querySelector(`input[data-page-item="${el.dataset.clone}"]`);
     if (inpt) {
       el.disabled = true;
       el.textContent = 'Added'
@@ -200,12 +203,12 @@ const updateCommonFieldsButtons = () => {
 const renderCommonFieldsDraggable = () => {
   commonFieldsDraggable.innerHTML = ''
   commonFieldsDv.querySelectorAll('input').forEach((el) => {
-    //if (commonFieldsPageCurrent === Number(el.dataset.page))
-    {
+    if (commonFieldsPageCurrent === Number(el.dataset.page)) {
+      const iconSrc = el.dataset.iconSrc;
       const name = el.dataset.name;
       const page = el.dataset.page;
       const pageItem = el.dataset.pageItem;
-      const template = commonFieldsItemTemplate(name, page, pageItem)
+      const template = commonFieldsItemTemplate(name, page, pageItem, iconSrc)
       commonFieldsDraggable?.appendChild(template.content.firstChild);
     }
   });
@@ -213,7 +216,7 @@ const renderCommonFieldsDraggable = () => {
   displayedInformationBlock();
 }
 
-const commonFieldsItemTemplate = (name, page, pageItem) => {
+const commonFieldsItemTemplate = (name, page, pageItem, iconSrc) => {
   const template = document.createElement('template');
   template.innerHTML =
     `<li>
@@ -222,7 +225,7 @@ const commonFieldsItemTemplate = (name, page, pageItem) => {
           <img src="./img/menu.svg" alt="">
         </div>
         <div class="icon">
-          <img src="./img/common-fields-icon-1.svg" alt="">
+          <img src="${iconSrc}" alt="">
         </div>
         <span>${name}</span>
       </div>
@@ -231,9 +234,6 @@ const commonFieldsItemTemplate = (name, page, pageItem) => {
 
   return template;
 };
-
-let commonFieldsPageCurrent = 0;
-let commonFieldsPageItemValue = '';
 
 commonFieldsDraggable.addEventListener('click', (e) => {
   if (e.target.classList.contains('btn')) {
@@ -569,12 +569,19 @@ deletePageBtn.addEventListener('click', () => {
     return;
   }
 
+  const inputsToRemove = commonFieldsDv.querySelectorAll(`input[name^="common-fields[${pages.length}]["]`);
+
   if (pages.length === commonFieldsPageCurrent) {
     commonFieldsPageCurrent = commonFieldsPageCurrent - 1;
   }
 
   pages.pop();
   renderPages();
+
+  inputsToRemove.forEach(el => {
+    el.remove();
+  })
+  updateCommonFieldsButtons();
 })
 
 const pages = [1];

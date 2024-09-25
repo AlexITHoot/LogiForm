@@ -519,6 +519,14 @@
       font-weight: 400;
       color: var(--grey);
     }
+
+    .icon {
+      display: inline-flex;
+
+      picture {
+        display: inline-flex;
+      }
+    }
   }
 
   .chat-wrapper {
