@@ -72,6 +72,14 @@
     flex: 1 1 100%;
     display: none;
   }
+
+  .wizard-right-side {
+    .wizard-footer {
+      .btn {
+        width: auto;
+      }
+    }
+  }
 }
 
 // Medium devices (tablets, less than 992px)
