@@ -303,6 +303,7 @@
       padding: 6px;
       background: var(--bg-secondary);
       cursor: pointer;
+      flex-shrink: 0;
 
       &:hover {
         .tooltip {
@@ -408,9 +409,15 @@
       padding: 15px;
 
       border-radius: var(--border-radius);
+      transition: 0.1s;
 
       &::placeholder {
         color: var(--grey);
+      }
+
+      &:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(54, 153, 255, 0.23);
       }
     }
 
