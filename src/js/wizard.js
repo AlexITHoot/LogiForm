@@ -1,3 +1,6 @@
+'use strict';
+// import $ from "jquery";
+
 //Sortable
 
 import Sortable from 'sortablejs';

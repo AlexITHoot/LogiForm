@@ -1,122 +1,227 @@
-//Dropdown 
-const dropdownBtn = document.querySelectorAll('.dropdown-btn');
-const dropdownContent = document.querySelectorAll('.dropdown-content');
-const content = document.querySelector('.content');
+//Dropdown
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  dropdownBtn.forEach((el) => {
-
-    el.addEventListener('click', () => {
-      let rect = el.getBoundingClientRect();
-
-      if (el.nextElementSibling.classList.contains('show')) {
-        el.blur();
-        el.nextElementSibling.classList.toggle("show");
-      } else {
-        dropdownContent.forEach(el => {
-          el.classList.remove("show");
-        })
-        el.nextElementSibling.classList.toggle("show");
-      }
-
-
-      el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight + 4}px)`;
-      // content.addEventListener('scroll', () => {
-      //   el.nextElementSibling.style.transform = `translate(${rect.left - (el.nextElementSibling.offsetWidth - el.offsetWidth)}px, ${rect.top + el.offsetHeight - content.scrollTop}px)`;
-      // })
-    })
-
-  })
-});
-
-
-content.addEventListener('scroll', () => {
-
-  if (content.scrollTop > 0) {
-    dropdownContent.forEach(el => {
-      el.classList.remove("show");
-    })
-    dropdownBtn.forEach(el => {
-      el.blur();
-    })
+function DropdownBtnHandler() {
+  const uiElements = {
+    buttons: null,
+    content: null,
+    dropdownContent: null,
+    window: null
   }
-})
 
+  function initUiElements() {
+    uiElements.buttons = $('.dropdown-btn');
+    uiElements.content = $('.content');
+    uiElements.dropdownContent = $('.dropdown-content');
+    uiElements.window = $(window);
+  }
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function (event) {
-  if (!event.target.matches('.dropdown-btn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+  function subscribeToEvents() {
+    uiElements.buttons.on('click', onClickDropdownBtn);
+    uiElements.content.on('scroll', hideDropdownContent);
+    uiElements.window.on('click', hideDropdownBtn);
+  }
+
+  function onClickDropdownBtn() {
+
+    let elementPosition = $(this).offset();
+    console.log(elementPosition);
+
+    if ($(this).next().hasClass('show')) {
+      $(this).next().removeClass('show');
+    } else {
+      uiElements.dropdownContent.removeClass('show');
+      $(this).next().addClass('show');
+    }
+    $(this).next().css('transform', `translate(${elementPosition.left - ($(this).next().width() - $(this).width())}px, ${elementPosition.top + $(this).height() + 4}px)`);
+  }
+
+  function hideDropdownContent() {
+    if (uiElements.content.scrollTop() > 0) {
+      uiElements.dropdownContent.removeClass('show');
+      uiElements.buttons.blur();
+    }
+  }
+
+  //Close the dropdown if the user clicks outside of it
+  function hideDropdownBtn(e) {
+    if (!e.target.matches('.dropdown-btn')) {
+      if (uiElements.dropdownContent.hasClass('show')) {
+        uiElements.dropdownContent.removeClass('show');
       }
     }
   }
+
+  const init = () => {
+    initUiElements();
+    subscribeToEvents();
+  }
+
+  init();
 }
 
 //Highlight active menu link
 
-const menuLinks = document.querySelectorAll('.menu-nav li');
-const path = location.pathname.split("/");
-menuLinks.forEach(el => {
-
-  if (path[path.length - 1] == el.querySelector('a').getAttribute('href') && el.querySelector('a').getAttribute('href') != '') {
-    el.classList.add('active');
-  } else {
-    el.classList.remove('active');
+function HighlightMenu() {
+  const uiElements = {
+    menuLinks: null,
+    path: null,
   }
-})
 
+  function initUiElements() {
+    uiElements.menuLinks = $('.menu-nav li');
+    uiElements.path = location.pathname.split("/");
+  }
+
+  function highlightActiveMenuLink() {
+    const currentPath = uiElements.path[uiElements.path.length - 1];
+    uiElements.menuLinks.each(function () {
+      const link = $(this).children().attr('href').split("/").pop();
+      if (currentPath === link && link !== '') {
+        $(this).addClass('active');
+      } else {
+        $(this).removeClass('active');
+      }
+    });
+  }
+
+  const init = () => {
+    initUiElements();
+    highlightActiveMenuLink();
+  }
+
+  init();
+}
 
 //Mobile sidebar menu
 
-const body = document.querySelector('body');
-const menuBtn = document.querySelector('.menu-btn');
-const sidebar = document.querySelector('.sidebar');
-const closeBtn = document.querySelector('.sidebar-header .close')
-const overlay = document.querySelector('.overlay');
-
-if (overlay) {
-  overlay.addEventListener('click', () => {
-    toggleMenu(false);
-  })
-}
-
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    toggleMenu(false);
-  })
-}
-
-if (menuBtn) {
-  menuBtn.addEventListener('click', () => {
-    toggleMenu(true)
-  })
-}
-
-const toggleMenu = (state) => {
-  if (state) {
-    sidebar.classList.add('active');
-    overlay.classList.add('active');
-    body.classList.add('active');
-  } else {
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-    body.classList.remove('active');
+function MobileMenu() {
+  const uiElements = {
+    body: null,
+    menuBtn: null,
+    sidebar: null,
+    closeBtn: null,
+    overlay: null,
+    window: null,
   }
 
-}
-
-
-const checkWidth = () => {
-  const windowWidth = window.innerWidth;
-  if (windowWidth >= 992) {
-    toggleMenu(false)
+  function initUiElements() {
+    uiElements.body = $('body');
+    uiElements.menuBtn = $('.menu-btn');
+    uiElements.sidebar = $('.sidebar');
+    uiElements.closeBtn = $('.sidebar-header .close');
+    uiElements.overlay = $('.overlay');
+    uiElements.window = $(window);
   }
+
+  function subscribeToEvents() {
+    uiElements.menuBtn.on('click', onClickMenuBtn);
+    uiElements.closeBtn.on('click', onClickClocseBtn);
+    uiElements.overlay.on('click', onClickOverlay);
+    uiElements.window.on('resize', checkWidth)
+  }
+
+  function onClickMenuBtn() {
+    handleToggleMenu(true);
+  }
+
+  function onClickClocseBtn() {
+    handleToggleMenu(false);
+  }
+
+  function onClickOverlay() {
+    handleToggleMenu(false);
+  }
+
+  function handleToggleMenu(state) {
+    if (state) {
+      uiElements.sidebar.addClass('active');
+      uiElements.overlay.addClass('active');
+      uiElements.body.addClass('active');
+    } else {
+      uiElements.sidebar.removeClass('active');
+      uiElements.overlay.removeClass('active');
+      uiElements.body.removeClass('active');
+    }
+  }
+
+  function checkWidth() {
+    const windowWidth = uiElements.window.width();
+    if (windowWidth >= 992) {
+      handleToggleMenu(false)
+    }
+  }
+
+  const init = () => {
+    initUiElements();
+    subscribeToEvents()
+  }
+
+  init();
 }
 
-window.addEventListener('resize', checkWidth)
+//Tabs
+
+function Tabs() {
+  const uiElements = {
+    tab: null,
+    tabHeader: null,
+    tabContent: null,
+  }
+
+  function initUiElements() {
+    uiElements.tab = $('.nav-item');
+    uiElements.tabHeader = $('.nav-tabs');
+    uiElements.tabContent = $('.tab-content-item');
+  }
+
+
+  function subscribeToEvents() {
+    uiElements.tabHeader.on('click', onClickTab);
+  }
+
+  function hideTabContent(item) {
+    for (let i = item; i < uiElements.tabContent.length; i++) {
+      uiElements.tabContent[i].removeClass('show');
+      uiElements.tabContent[i].addClass('hide');
+    }
+  }
+
+  function showTabContent(item) {
+    if (uiElements.tabContent[item].hasClass('hide')) {
+      uiElements.tabContent[item].removeClass('hide');
+      uiElements.tabContent[item].addClass('show');
+    }
+  }
+  function onClickTab() {
+    handleTab($(this));
+  }
+  function handleTab(event) {
+    uiElements.tab.each(function () {
+      $(this).removeClass('active');
+    })
+
+    let target = event.target;
+
+
+    if (target && target.hasClass('nav-item')) {
+      for (let i = 0; i < uiElements.tab.length; i++) {
+        if (target == uiElements.tab[i]) {
+          hideTabContent(0);
+          showTabContent(i);
+          target.addClass('active')
+          break;
+        }
+      }
+    }
+  }
+
+  const init = () => {
+    initUiElements();
+    subscribeToEvents();
+    // hideTabContent(1);
+    // uiElements.tab[0].addClass('active');
+  }
+
+  init();
+  console.log('NERW', typeof uiElements.tabContent);
+}

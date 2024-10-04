@@ -44,7 +44,7 @@
   overflow: auto;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
-  z-index: 1;
+  z-index: 10000;
 
   ul {
     li {
